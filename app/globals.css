@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: #ffffff;
+  --color-foreground: #1c1e21;
+  --color-muted: #65676b;
+  --color-border: #e4e6ea;
+  --color-brand: #1877f2;
+  --color-brand-light: #42a5f5;
+  --color-brand-dark: #0d5ac8;
+  --color-surface: #f0f2f5;
+  --color-surface-2: #e4e6ea;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #ffffff;
+  --foreground: #1c1e21;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: #1c1e21;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(24, 119, 242, 0.15);
+  color: #1c1e21;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f0f2f5;
+}
+::-webkit-scrollbar-thumb {
+  background: #ccd0d5;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1877f2;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid #1877f2;
+  outline-offset: 2px;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #1c1e21 0%, #65676b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-brand {
+  background: linear-gradient(135deg, #1877f2 0%, #42a5f5 50%, #64b5f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effect */
+.glow-brand {
+  box-shadow: 0 0 40px rgba(24, 119, 242, 0.2);
+}
+
+/* Grid dot pattern - light version */
+.dot-pattern {
+  background-image: radial-gradient(circle, #ccd0d5 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Line pattern - light version */
+.line-pattern {
+  background-image: 
+    linear-gradient(rgba(204, 208, 213, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(204, 208, 213, 0.3) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.card-shadow {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+              0 4px 12px rgba(0, 0, 0, 0.05);
 }
