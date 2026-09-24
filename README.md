@@ -19,38 +19,16 @@ Marki Labs, yenilikçi dijital çözümler, modern web tasarımı, özel yazıl�
 
 ## 🛠️ Kullanılan Teknolojiler
 
-| Teknoloji | Açıklama |
-| :--- | :--- |
-| **[Next.js 16](https://nextjs.org/)** | React Framework (App Router & Turbopack) |
-| **[React 19](https://react.dev/)** | Kullanıcı Arayüzü Kütüphanesi |
-| **[TypeScript](https://www.typescriptlang.org/)** | Tip Güvenli Kod Geliştirme |
-| **[Tailwind CSS v4](https://tailwindcss.com/)** | Modern & Esnek Stil Altyapısı |
-| **[Framer Motion](https://www.framer.com/motion/)** | Gelişmiş Animasyonlar ve Geçişler |
-| **[Lucide React](https://lucide.dev/)** | Modern Vektörel İkon Seti |
+| Teknoloji                                           | Açıklama                                 |
+| :-------------------------------------------------- | :--------------------------------------- |
+| **[Next.js 16](https://nextjs.org/)**               | React Framework (App Router & Turbopack) |
+| **[React 19](https://react.dev/)**                  | Kullanıcı Arayüzü Kütüphanesi            |
+| **[TypeScript](https://www.typescriptlang.org/)**   | Tip Güvenli Kod Geliştirme               |
+| **[Tailwind CSS v4](https://tailwindcss.com/)**     | Modern & Esnek Stil Altyapısı            |
+| **[Framer Motion](https://www.framer.com/motion/)** | Gelişmiş Animasyonlar ve Geçişler        |
+| **[Lucide React](https://lucide.dev/)**             | Modern Vektörel İkon Seti                |
 
 ---
-
-## 🚀 Hızlı Başlangıç
-
-Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
-
-### 1. Depoyu Klonlayın
-```bash
-git clone https://github.com/whyasaf/markiLabs.git
-cd markiLabs
-```
-
-### 2. Bağımlılıkları Yükleyin
-```bash
-npm install
-```
-
-### 3. Geliştirme Sunucusunu Başlatın
-```bash
-npm run dev
-```
-
-Tarayıcınızda `http://localhost:3030` adresine giderek projeyi görüntüleyebilirsiniz.
 
 ---
 
@@ -76,4 +54,4 @@ marki-labs/
 
 ## 📜 Lisans
 
-Bu proje **Marki Labs** haklarına tabidir. Tüm hakları saklıdır.
+Bu proje **marki Labs** haklarına tabidir. Tüm hakları saklıdır.
