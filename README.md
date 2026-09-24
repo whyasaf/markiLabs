@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚡ Marki Labs
 
-## Getting Started
+Marki Labs, yenilikçi dijital çözümler, modern web tasarımı, özel yazılım geliştirme ve kurumsal dijital dönüşüm hizmetleri sunan modern bir teknoloji ve tasarım stüdyosudur.
 
-First, run the development server:
+![Marki Labs Cover](public/images/software_design_concept.png)
 
+---
+
+## ✨ Öne Çıkan Özellikler
+
+- 🚀 **Next.js 16 (Turbopack & App Router)** ile ultra hızlı sayfa yüklenmeleri ve SEO optimizasyonu
+- 🎨 **Tailwind CSS v4 & Framer Motion** ile şık, dinamik ve akıcı kullanıcı deneyimi (UI/UX)
+- 🛒 **Mağaza & Çözüm Kataloğu:** Kurumsal kimlik, web tasarım ve özel yazılım çözümleri
+- 🌓 **Tema Kişiselleştirme:** Dinamik tema özelleştirici desteği
+- 📄 **Yasal Uyum Sayfaları:** KVKK, Gizlilik Politikası ve Kullanım Koşulları tam entegrasyonu
+- 📱 **Tamamen Responsive:** Mobil, tablet ve masaüstü cihazlarla kusursuz uyum
+
+---
+
+## 🛠️ Kullanılan Teknolojiler
+
+| Teknoloji | Açıklama |
+| :--- | :--- |
+| **[Next.js 16](https://nextjs.org/)** | React Framework (App Router & Turbopack) |
+| **[React 19](https://react.dev/)** | Kullanıcı Arayüzü Kütüphanesi |
+| **[TypeScript](https://www.typescriptlang.org/)** | Tip Güvenli Kod Geliştirme |
+| **[Tailwind CSS v4](https://tailwindcss.com/)** | Modern & Esnek Stil Altyapısı |
+| **[Framer Motion](https://www.framer.com/motion/)** | Gelişmiş Animasyonlar ve Geçişler |
+| **[Lucide React](https://lucide.dev/)** | Modern Vektörel İkon Seti |
+
+---
+
+## 🚀 Hızlı Başlangıç
+
+Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
+
+### 1. Depoyu Klonlayın
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/whyasaf/markiLabs.git
+cd markiLabs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Bağımlılıkları Yükleyin
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Geliştirme Sunucusunu Başlatın
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tarayıcınızda `http://localhost:3030` adresine giderek projeyi görüntüleyebilirsiniz.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Proje Yapısı
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+marki-labs/
+├── app/                  # Next.js App Router sayfaları & API rotaları
+│   ├── biz-kimiz/        # Ekip & Hakkımızda sayfaları
+│   ├── cozumler/         # Yazılım ve Tasarım çözümleri
+│   ├── magaza/           # Ürün & Hizmet mağazası
+│   ├── iletisim/         # İletişim sayfası
+│   ├── kvkk/             # KVKK Aydınlatma Metni
+│   ├── gizlilik/         # Gizlilik Politikası
+│   └── kosullar/         # Kullanım Koşulları
+├── components/           # Yeniden kullanılabilir UI bileşenleri (Navbar, Footer, vb.)
+│   └── ui/               # Temel UI elementleri (Button, Card, vb.)
+├── public/               # Statik görseller ve medya varlıkları
+└── ...
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📜 Lisans
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Bu proje **Marki Labs** haklarına tabidir. Tüm hakları saklıdır.
