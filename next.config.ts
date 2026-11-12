@@ -10,7 +10,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-
+  // Üst klasörde başka bir package-lock.json var; kökü bu projeye sabitle.
+  turbopack: {
+    root: __dirname,
+  },
 };
 
 export default nextConfig;
