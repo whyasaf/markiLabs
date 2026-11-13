@@ -38,12 +38,15 @@ function Ribbon({ d, view, length, className }: { d: string; view: Box; length: 
  * İçeriğin arkasında durur, tıklamaları engellemez.
  * - `d` / `view`: masaüstü yolu ve çizim alanı (bölümün oranına yakın seçilmeli, yoksa kıvrımlar basıklaşır)
  * - `dMobile` / `viewMobile`: telefon için ayrı yol; verilmezse telefonda şerit gösterilmez
+ * - `end`: bölümün sonu ekranın neresine gelince çizim bitsin (0 = üst, 1 = alt). Uzun, opak bir panelle
+ *   biten bölümlerde büyük tutulur ki çizim panel görünürken tamamlansın.
  */
 export default function ScrollLine({
   d,
   view = [1440, 900],
   dMobile,
   viewMobile = [390, 1100],
+  end = 0.35,
   children,
   className = "",
 }: {
@@ -51,11 +54,12 @@ export default function ScrollLine({
   view?: Box;
   dMobile?: string;
   viewMobile?: Box;
+  end?: number;
   children: ReactNode;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.95", "end 0.35"] });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.95", `end ${end}`] });
   // Kaydırmayı yumuşatarak takip etsin
   const length = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.4 });
 

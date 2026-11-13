@@ -15,6 +15,9 @@
 
 # next.js
 /.next/
+# iCloud Masaüstü eşitlemesinden kaçmak için: .next -> .next.nosync kısayolu (yerel)
+.next
+/.next.nosync/
 /out/
 
 # production

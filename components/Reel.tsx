@@ -2,8 +2,11 @@
 
 import { useRef, useState } from "react";
 
-/** Tam genişlik reel: sessiz otomatik oynar, sağ altta oynat/durdur. */
-export default function Reel({ src, poster }: { src: string; poster: string }) {
+/**
+ * Tam genişlik reel: sessiz otomatik oynar, sağ altta oynat/durdur.
+ * `fill`: kendi köşe/oranını bırakıp dış kutuyu tamamen doldurur (HeroSplit içinde kullanılır).
+ */
+export default function Reel({ src, poster, fill = false }: { src: string; poster: string; fill?: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(true);
 
@@ -20,7 +23,7 @@ export default function Reel({ src, poster }: { src: string; poster: string }) {
   };
 
   return (
-    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[24px] bg-white">
+    <div className={`relative w-full overflow-hidden bg-white ${fill ? "h-full" : "aspect-[16/9] rounded-[24px]"}`}>
       <video
         ref={ref}
         src={src}
@@ -30,7 +33,7 @@ export default function Reel({ src, poster }: { src: string; poster: string }) {
         muted
         loop
         playsInline
-        aria-label="Marki Labs ürünlerinden kısa görüntüler"
+        aria-label="Marki Labs tanıtım videosu"
       />
       <button
         type="button"

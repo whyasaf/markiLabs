@@ -67,10 +67,8 @@ export default function HizmetlerPage() {
               </Reveal>
             </div>
             <div className={`mt-12 grid gap-x-4 gap-y-12 ${b.cards.length > 1 ? "md:grid-cols-2 lg:grid-cols-3" : "md:grid-cols-2"}`}>
-              {b.cards.map((c, i) => (
-                <Reveal key={c.href} delay={i * 0.08}>
-                  <WorkCard href={c.href} title={c.title} tags={c.tags} video={c.video} status={c.status} />
-                </Reveal>
+              {b.cards.map((c) => (
+                <WorkCard key={c.href} href={c.href} title={c.title} tags={c.tags} video={c.video} status={c.status} />
               ))}
             </div>
           </Container>

@@ -1,70 +1,61 @@
-import Reel from "@/components/Reel";
+import HeroSplit from "@/components/HeroSplit";
 import { ArrowCircle } from "@/components/Arrow";
 import Reveal from "@/components/Reveal";
 import ScrollLine from "@/components/ScrollLine";
 import WorkCard from "@/components/WorkCard";
+import DuotoneVideo from "@/components/DuotoneVideo";
+import { ScaleIn } from "@/components/CardReveal";
 import { Container, Label, Pill } from "@/components/ui";
 import { PROJECTS } from "@/data/projects";
 import { WORK } from "@/data/work";
 
-// Şeridin yolu (1440x900 alanında): başlığın üstünden girer, altında halka çizer, butonların altından sağa çıkar; yazıların üstünden geçmez
-const LINE =
-  "M -60 140 C 260 140 560 260 590 480 C 615 670 470 770 340 740 C 200 710 190 590 280 545 C 380 495 500 570 590 650 C 790 810 1150 700 1500 600";
+// Tanıtım şeridi (ölçülerle, 1440x1312 = bölüm + üst/alt 96px): Lusion'daki gibi sol üstten girer,
+// büyük bir yayla başlığın ilk satırının arkasından geçer, "tek ekip."in sağından inip kartın tepesinden içine dalar
+const LINE = "M -80 40 C 260 70 520 200 590 400 C 640 540 560 600 540 760";
 
-// İşler ızgarası (ölçülerle, 1336x2307 = ızgara + üst/alt 96px): satır aralarındaki 80px boşluklardan
-// (y≈605, 1154, 1702) hafif dalgayla geçer; aşağı inişleri ızgaranın dışında (görünmez) yapar, böylece hiçbir yazıya değmez
-const WORKS_LINE =
-  "M 1420 66 C 1000 66 600 66 380 66 C 120 66 -80 120 -80 400 C -80 605 -40 590 250 590 C 520 590 600 625 820 625 C 1040 625 1150 590 1400 600 C 1480 600 1480 700 1480 900 C 1480 1140 1440 1136 1150 1136 C 900 1136 820 1172 600 1172 C 380 1172 250 1140 -60 1140 C -100 1140 -100 1300 -100 1450 C -100 1720 -40 1720 250 1720 C 520 1720 600 1684 820 1684 C 1040 1684 1150 1716 1400 1710 C 1480 1710 1480 1900 1480 2100 C 1480 2260 1440 2260 1000 2260 C 600 2260 300 2260 -80 2260";
+// Yaklaşım → Kapanış (ölçülerle, 1440x1370 = bölüm + üst/alt 96px): üstteki şeridin devamı gibi sağdan,
+// paragrafların üstündeki boşluktan girer; "Yaklaşımımız" etiketinin altındaki boş alanda halka çizer;
+// paragrafların altından geçip "Sıradaki proje" paneline doğru iner ve panelin arkasına girer. Yazılara değmez.
+const APPROACH_LINE =
+  "M 1500 150 C 1100 150 800 170 600 200 C 380 230 250 260 200 380 C 150 500 260 560 360 530 C 470 495 460 380 360 370 C 220 360 160 470 230 560 C 320 680 560 650 720 640 C 860 632 900 700 860 800";
 
 export default function Home() {
   return (
     <>
-      {/* Giriş */}
-      <Container className="pt-16 md:pt-24">
-        <Reveal>
-          <h1 className="max-w-[1100px] text-[clamp(44px,7.2vw,112px)] font-medium leading-[0.98] tracking-[-0.05em]">
-            Fikirleri çalışan ürünlere dönüştürüyoruz.
-          </h1>
-        </Reveal>
-        <div className="mt-10 flex flex-wrap items-end justify-between gap-6 md:mt-14">
-          <p className="max-w-[440px] text-[17px] text-muted">
-            Marki Labs; web, yazılım ve marka tasarımı yapan bir teknoloji stüdyosu.
-          </p>
-          <Label className="text-muted">Kaydırarak keşfet</Label>
-        </div>
-      </Container>
+      {/* Giriş: başlık iki yana açılır, aralarından reel büyüyüp ekranı kaplar; arkada fare şeridi */}
+      <HeroSplit src="/videos/marki-reel.mp4" poster="/videos/marki-reel-poster.jpg" />
 
-      <div className="mt-6 px-2 md:px-3">
-        <Reveal>
-          <Reel src="/videos/reel.mp4" poster="/videos/reel-poster.jpg" />
-        </Reveal>
-      </div>
-
-      {/* Tanıtım: arkada kaydırdıkça çizilen şerit */}
-      <ScrollLine d={LINE}>
-      <Container className="py-28 md:py-40">
-        <div className="grid gap-10 md:grid-cols-[1fr_1fr] md:gap-20">
+      {/* Tanıtım (Lusion "Bold Ideas" düzeni): merdiven başlık, solda mavi tonlu video kartı, sağda metin.
+          Şerit başlığın arkasından geçip kartın tepesinden içine dalar. */}
+      <ScrollLine d={LINE} view={[1440, 1312]} end={0.85}>
+        <Container className="py-28 md:py-40">
           <Reveal>
-            <h2 className="text-[clamp(36px,4.4vw,64px)] font-medium leading-[1.02] tracking-[-0.04em]">
-              Fikirden ürüne,
-              <br />
-              tek ekip.
+            <h2 className="text-[clamp(56px,10.4vw,172px)] font-medium leading-[0.95] tracking-[-0.055em]">
+              <span className="block md:pl-[24%]">Fikirden ürüne,</span>
+              <span className="block">tek ekip.</span>
             </h2>
           </Reveal>
-          <Reveal delay={0.1}>
-            <p className="text-[clamp(18px,1.5vw,22px)] leading-[1.45]">
-              Tasarımı, yazılımı ve yayına almayı aynı ekip yapıyor. Kendi ürünlerimizi geliştirirken kullandığımız
-              yöntemleri müşteri işlerimizde de kullanıyoruz.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Pill href="#yaklasim">Yaklaşımımız</Pill>
-              <Pill href="#isler" tone="light">
-                İşlerimiz
-              </Pill>
-            </div>
-          </Reveal>
-        </div>
-      </Container>
+
+          <div className="mt-16 grid items-start gap-10 md:mt-24 md:grid-cols-[1.15fr_1fr] md:gap-20">
+            <Reveal>
+              <DuotoneVideo images={["/work/vitren/hero.webp", "/work/vitren/tower.webp", "/work/vitren/horizon.webp"]} />
+            </Reveal>
+            <Reveal delay={0.1} className="md:pt-24">
+              <p className="max-w-[560px] text-[clamp(19px,1.6vw,24px)] leading-[1.45]">
+                Tasarımı, yazılımı ve yayına almayı aynı ekip yapıyor. Kendi ürünlerimizi geliştirirken kullandığımız
+                yöntemleri müşteri işlerimizde de kullanıyoruz.
+              </p>
+              <div className="mt-12 flex flex-wrap gap-3">
+                <Pill href="#yaklasim" tone="light">
+                  Yaklaşımımız
+                </Pill>
+                <Pill href="#isler" tone="ghost">
+                  İşlerimiz
+                </Pill>
+              </div>
+            </Reveal>
+          </div>
+        </Container>
       </ScrollLine>
 
       {/* Öne çıkan işler */}
@@ -77,32 +68,29 @@ export default function Home() {
             </p>
           </div>
 
-          <ScrollLine className="mt-14" d={WORKS_LINE} view={[1336, 2307]}>
-          <div className="grid gap-x-4 gap-y-14 md:grid-cols-2 md:gap-y-20">
-            {PROJECTS.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 0.08}>
-                <WorkCard
-                  href={`/projeler/${p.slug}`}
-                  title={p.name}
-                  tags={p.tags}
-                  video={{ src: p.media.loop, poster: p.media.poster }}
-                />
-              </Reveal>
+          <div className="mt-14 grid gap-x-4 gap-y-14 md:grid-cols-2 md:gap-y-20">
+            {PROJECTS.map((p) => (
+              <WorkCard
+                key={p.slug}
+                href={`/projeler/${p.slug}`}
+                title={p.name}
+                tags={p.tags}
+                video={{ src: p.media.loop, poster: p.media.poster }}
+              />
             ))}
-            {WORK.map((w, i) => (
-              <Reveal key={w.href} delay={(i % 2) * 0.08}>
-                <WorkCard
-                  href={w.slug ? `/projeler/${w.slug}` : w.href}
-                  title={w.name}
-                  tags={w.tags}
-                  status={w.status}
-                  video={w.video}
-                  external={!w.slug}
-                />
-              </Reveal>
+            {WORK.map((w) => (
+              <WorkCard
+                key={w.href}
+                href={w.slug ? `/projeler/${w.slug}` : w.href}
+                title={w.name}
+                tags={w.tags}
+                status={w.status}
+                video={w.video}
+                external={!w.slug}
+              />
             ))}
             {(PROJECTS.length + WORK.length) % 2 === 1 && (
-              <Reveal delay={0.08}>
+              <ScaleIn>
                 <a
                   href="/iletisim"
                   className="group flex aspect-[16/10] flex-col justify-between rounded-[20px] bg-blue p-7 text-white md:p-10"
@@ -117,14 +105,14 @@ export default function Home() {
                     <ArrowCircle className="h-14 w-14 bg-white text-blue" />
                   </span>
                 </a>
-              </Reveal>
+              </ScaleIn>
             )}
           </div>
-          </ScrollLine>
         </Container>
       </section>
 
-      {/* Yaklaşım */}
+      {/* Yaklaşım → Kapanış: üstteki şeridin devamı */}
+      <ScrollLine d={APPROACH_LINE} view={[1440, 1370]} end={1}>
       <section id="yaklasim" className="scroll-mt-6 py-32 md:py-44">
         <Container>
           <div className="grid gap-10 md:grid-cols-[1fr_1.4fr] md:gap-20">
@@ -163,6 +151,7 @@ export default function Home() {
           </div>
         </Reveal>
       </section>
+      </ScrollLine>
     </>
   );
 }

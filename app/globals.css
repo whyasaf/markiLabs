@@ -74,3 +74,21 @@ body {
 }
 .name-swap { animation: name-swap 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
 @media (prefers-reduced-motion: reduce) { .name-swap { animation: none; } }
+
+/* Duotone kart: fotoğraflar sırayla görünür ve yavaşça yakınlaşır (3 fotoğraf, döngü = 3 x 5 sn) */
+@keyframes duo-slide {
+  0% { opacity: 0; transform: scale(1.02); }
+  8% { opacity: 1; }
+  33% { opacity: 1; }
+  41% { opacity: 0; transform: scale(1.12); }
+  100% { opacity: 0; transform: scale(1.12); }
+}
+.duo-slide { animation-name: duo-slide; animation-timing-function: linear; animation-iteration-count: infinite; opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .duo-slide { animation: none; }
+  .duo-slide:first-child { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scale-in { transform: none !important; }
+}

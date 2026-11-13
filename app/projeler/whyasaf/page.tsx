@@ -55,8 +55,8 @@ export default function WhyasafPage() {
         </Reveal>
         <Reveal delay={0.1}>
           <p className="mt-10 max-w-[760px] text-[clamp(20px,2vw,26px)] italic leading-[1.5] text-[#a1a1aa]">
-            Yazılım Geliştirici &amp; Tasarımcı <span style={{ color: CYAN }}>//</span> Kodu tasarım estetiğiyle
-            birleştiriyorum <span style={{ color: CYAN }}>//</span> Yapay zekâyı keşfedip dijital ürünler geliştiriyorum
+            Yazılım Geliştirici &amp; Tasarımcı <span style={{ color: CYAN }}>{"//"}</span> Kodu tasarım estetiğiyle
+            birleştiriyorum <span style={{ color: CYAN }}>{"//"}</span> Yapay zekâyı keşfedip dijital ürünler geliştiriyorum
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <a
