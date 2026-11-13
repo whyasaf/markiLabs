@@ -1,7 +1,7 @@
 export type Project = {
   slug: string;
   name: string;
-  license: "Açık kaynak" | "Lisanslı";
+  license: "Açık kaynak" | "Ücretsiz";
   tags: string[];
   headline: string;
   summary: string;
@@ -35,8 +35,8 @@ export const PROJECTS: Project[] = [
   {
     slug: "codevocab",
     name: "CodeVocab",
-    license: "Lisanslı",
-    tags: ["Lisanslı", "Web uygulaması", "Yapay zekâ"],
+    license: "Ücretsiz",
+    tags: ["Ücretsiz", "Web uygulaması", "Yapay zekâ"],
     headline: "İngilizceni yaz. Mentorun düzeltsin.",
     summary:
       "İngilizce cümleni puanlayan, hatalarını Türkçe açıklayan ve doğrusunu gösteren yapay zekâ destekli bir mentor.",

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Arrow } from "@/components/Arrow";
 import Link from "next/link";
 import LazyVideo from "@/components/LazyVideo";
 
@@ -35,7 +36,9 @@ export default function WorkCard({ href, title, tags, status, external, video, i
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 px-1 pt-4">
         <span className="text-[22px] font-medium tracking-[-0.02em] md:text-[26px]">
           {title}
-          {external && <span className="ml-1.5 text-muted transition-colors group-hover:text-blue">↗</span>}
+          {external && (
+            <Arrow className="ml-2 inline-block h-[0.7em] w-[0.7em] -rotate-45 align-middle text-muted transition-[color,transform] duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-blue" />
+          )}
         </span>
         <span className="label text-muted">{tags.join(" · ")}</span>
       </div>

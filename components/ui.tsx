@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowCircle, FillBubble } from "@/components/Arrow";
 import type { ReactNode } from "react";
 
 const isExternal = (href: string) => href.startsWith("http") || href.startsWith("mailto:");
@@ -14,28 +15,22 @@ export function Pill({
   tone?: "dark" | "light" | "blue" | "ghost";
 }) {
   const tones = {
-    dark: { box: "bg-ink text-white", dot: "bg-white text-ink" },
-    light: { box: "bg-white text-ink", dot: "bg-ink text-white" },
-    blue: { box: "bg-blue text-white", dot: "bg-white text-blue" },
-    ghost: { box: "border border-ink/20 text-ink hover:border-ink", dot: "bg-ink text-white" },
+    // bubble: oktaki dairenin rengi; üzerine gelince bütün butonu kaplar. hover: kaplayınca yazının rengi
+    dark: { box: "bg-ink text-white", bubble: "bg-white", arrow: "text-ink", hover: "group-hover:text-ink" },
+    light: { box: "bg-white text-ink", bubble: "bg-ink", arrow: "text-white", hover: "group-hover:text-white" },
+    blue: { box: "bg-blue text-white", bubble: "bg-white", arrow: "text-blue", hover: "group-hover:text-blue" },
+    ghost: { box: "border border-ink/20 text-ink", bubble: "bg-ink", arrow: "text-white", hover: "group-hover:text-white" },
   }[tone];
 
   const inner = (
     <>
-      <span>{children}</span>
-      <span
-        aria-hidden
-        className={`relative inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full ${tones.dot}`}
-      >
-        <span className="transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-x-9">→</span>
-        <span className="absolute -translate-x-9 transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-x-0">
-          →
-        </span>
-      </span>
+      <FillBubble className={`right-1.5 h-9 w-9 ${tones.bubble}`} />
+      <span className={`transition-colors duration-500 ${tones.hover}`}>{children}</span>
+      <ArrowCircle className={`h-9 w-9 ${tones.arrow}`} />
     </>
   );
 
-  const cls = `group inline-flex min-h-12 items-center gap-4 rounded-full py-1.5 pl-6 pr-1.5 text-[15px] font-medium transition-colors ${tones.box}`;
+  const cls = `group relative isolate inline-flex min-h-12 items-center gap-4 overflow-hidden rounded-full py-1.5 pl-6 pr-1.5 text-[15px] font-medium ${tones.box}`;
 
   return isExternal(href) ? (
     <a href={href} className={cls} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">

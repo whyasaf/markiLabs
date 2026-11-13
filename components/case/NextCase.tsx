@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowCircle } from "@/components/Arrow";
 import { nextCase } from "@/data/cases";
 
 /** Sıradaki projeye geçiş kartı; kart, sıradaki projenin kendi renklerini taşır. */
@@ -21,12 +22,7 @@ export default function NextCase({ current, radius = 0 }: { current: string; rad
           >
             {n.name}
           </span>
-          <span
-            className="inline-flex h-16 w-16 items-center justify-center rounded-full text-2xl transition-transform duration-500 group-hover:-rotate-45"
-            style={{ background: n.accent, color: n.bg }}
-          >
-            →
-          </span>
+          <ArrowCircle className="h-16 w-16" style={{ background: n.accent, color: n.bg }} />
         </span>
       </Link>
     </section>

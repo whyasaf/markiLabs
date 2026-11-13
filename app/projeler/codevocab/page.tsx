@@ -59,13 +59,7 @@ export default function CodeVocabPage() {
               >
                 CodeVocab&apos;ı aç ↗
               </a>
-              <a
-                href="/iletisim"
-                className="inline-flex min-h-12 items-center rounded-full border border-[#27272a] px-6 text-[15px] font-medium hover:border-[#fafafa]"
-              >
-                Lisans için yazın
-              </a>
-              <span className={`${mlabel} ml-2 text-[#71717a]`}>LİSANSLI · WEB UYGULAMASI · YAPAY ZEKÂ</span>
+              <span className={`${mlabel} ml-2 text-[#71717a]`}>ÜCRETSİZ · WEB UYGULAMASI · YAPAY ZEKÂ</span>
             </div>
           </Reveal>
         </div>

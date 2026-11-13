@@ -9,7 +9,6 @@ const COLS = [
     links: [
       { label: "Ana sayfa", href: "/" },
       { label: "Hizmetler", href: "/hizmetler" },
-      { label: "Mağaza", href: "/magaza" },
       { label: "Hakkımızda", href: "/hakkimizda" },
       { label: "İletişim", href: "/iletisim" },
     ],

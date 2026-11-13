@@ -1,9 +1,20 @@
 import Reel from "@/components/Reel";
+import { ArrowCircle } from "@/components/Arrow";
 import Reveal from "@/components/Reveal";
+import ScrollLine from "@/components/ScrollLine";
 import WorkCard from "@/components/WorkCard";
 import { Container, Label, Pill } from "@/components/ui";
 import { PROJECTS } from "@/data/projects";
 import { WORK } from "@/data/work";
+
+// Şeridin yolu (1440x900 alanında): başlığın üstünden girer, altında halka çizer, butonların altından sağa çıkar; yazıların üstünden geçmez
+const LINE =
+  "M -60 140 C 260 140 560 260 590 480 C 615 670 470 770 340 740 C 200 710 190 590 280 545 C 380 495 500 570 590 650 C 790 810 1150 700 1500 600";
+
+// İşler ızgarası (ölçülerle, 1336x2307 = ızgara + üst/alt 96px): satır aralarındaki 80px boşluklardan
+// (y≈605, 1154, 1702) hafif dalgayla geçer; aşağı inişleri ızgaranın dışında (görünmez) yapar, böylece hiçbir yazıya değmez
+const WORKS_LINE =
+  "M 1420 66 C 1000 66 600 66 380 66 C 120 66 -80 120 -80 400 C -80 605 -40 590 250 590 C 520 590 600 625 820 625 C 1040 625 1150 590 1400 600 C 1480 600 1480 700 1480 900 C 1480 1140 1440 1136 1150 1136 C 900 1136 820 1172 600 1172 C 380 1172 250 1140 -60 1140 C -100 1140 -100 1300 -100 1450 C -100 1720 -40 1720 250 1720 C 520 1720 600 1684 820 1684 C 1040 1684 1150 1716 1400 1710 C 1480 1710 1480 1900 1480 2100 C 1480 2260 1440 2260 1000 2260 C 600 2260 300 2260 -80 2260";
 
 export default function Home() {
   return (
@@ -29,7 +40,8 @@ export default function Home() {
         </Reveal>
       </div>
 
-      {/* Tanıtım */}
+      {/* Tanıtım: arkada kaydırdıkça çizilen şerit */}
+      <ScrollLine d={LINE}>
       <Container className="py-28 md:py-40">
         <div className="grid gap-10 md:grid-cols-[1fr_1fr] md:gap-20">
           <Reveal>
@@ -53,6 +65,7 @@ export default function Home() {
           </Reveal>
         </div>
       </Container>
+      </ScrollLine>
 
       {/* Öne çıkan işler */}
       <section id="isler" className="scroll-mt-6">
@@ -64,7 +77,8 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-14 grid gap-x-4 gap-y-14 md:grid-cols-2 md:gap-y-20">
+          <ScrollLine className="mt-14" d={WORKS_LINE} view={[1336, 2307]}>
+          <div className="grid gap-x-4 gap-y-14 md:grid-cols-2 md:gap-y-20">
             {PROJECTS.map((p, i) => (
               <Reveal key={p.slug} delay={i * 0.08}>
                 <WorkCard
@@ -100,17 +114,13 @@ export default function Home() {
                       <br />
                       projeniz olabilir.
                     </span>
-                    <span
-                      aria-hidden
-                      className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-xl text-blue transition-transform duration-500 group-hover:-rotate-45"
-                    >
-                      →
-                    </span>
+                    <ArrowCircle className="h-14 w-14 bg-white text-blue" />
                   </span>
                 </a>
               </Reveal>
             )}
           </div>
+          </ScrollLine>
         </Container>
       </section>
 
@@ -122,14 +132,14 @@ export default function Home() {
             <div className="flex flex-col gap-8 text-[clamp(22px,2.2vw,32px)] leading-[1.3] tracking-[-0.02em]">
               <Reveal>
                 <p>
-                  Her işe, ne yapılması gerektiğini birlikte netleştirerek başlıyoruz. Kapsamı, süreyi ve fiyatı yazılı
-                  olarak paylaşıyor; sonra tasarıma geçiyoruz.
+                  Hiçbir iş bir şablondan çıkmıyor. Bir yol yardım firması da, bir eğitim sistemi de kendi fontu, rengi ve
+                  diliyle konuşuyor.
                 </p>
               </Reveal>
               <Reveal delay={0.08}>
                 <p className="text-muted">
-                  Tasarım ve kod aynı masada ilerliyor. Ara teslimlerle çalışıyor, her adımda onayınızı alıyor ve işi
-                  yayına aldıktan sonra da yanınızda kalıyoruz.
+                  Kendi ürünlerimizi de yayına alıyoruz; Lecmic açık kaynak, CodeVocab ücretsiz. Müşteri işlerine de bir
+                  ürün gibi bakıyoruz.
                 </p>
               </Reveal>
             </div>

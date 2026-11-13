@@ -32,9 +32,12 @@ body {
   color: #fff;
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-blue);
-  outline-offset: 3px;
+/* base katmanında: site genelinde odak çerçevesi; tek tek bileşenler outline-none ile kapatabilir */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 3px;
+  }
 }
 
 /* Lusion tarzı küçük etiket: mono, büyük harf */
@@ -50,3 +53,24 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* Yasal metinler */
+.legal { font-size: 17px; line-height: 1.75; color: #474b58; }
+.legal section + section { margin-top: 44px; }
+.legal h2 { font-size: 24px; font-weight: 500; letter-spacing: -0.02em; color: var(--color-ink); margin-bottom: 14px; }
+.legal p + p, .legal p + ul, .legal ul + p { margin-top: 14px; }
+.legal ul { list-style: disc; padding-left: 1.25em; display: grid; gap: 6px; }
+.legal strong { color: var(--color-ink); font-weight: 500; }
+.legal a { color: var(--color-blue); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .manifesto span { opacity: 1 !important; }
+}
+
+/* İletişim: ad alanında dönen örnek isimler */
+@keyframes name-swap {
+  from { opacity: 0; transform: translateY(45%); }
+  to { opacity: 1; transform: none; }
+}
+.name-swap { animation: name-swap 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@media (prefers-reduced-motion: reduce) { .name-swap { animation: none; } }
