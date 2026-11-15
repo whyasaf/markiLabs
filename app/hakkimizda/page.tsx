@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { ArrowCircle } from "@/components/Arrow";
 import Link from "next/link";
 import Manifesto from "@/components/Manifesto";
-import Reel from "@/components/Reel";
 import Reveal from "@/components/Reveal";
 import ScrollLine from "@/components/ScrollLine";
+import TeamScroll from "@/components/TeamScroll";
+import { TEAM } from "@/data/team";
 import { Container, Label } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -29,11 +30,8 @@ export default function HakkimizdaPage() {
         </div>
       </Container>
 
-      <div className="px-2 md:px-3">
-        <Reveal>
-          <Reel src="/videos/reel.mp4" poster="/videos/reel-poster.jpg" />
-        </Reveal>
-      </div>
+      {/* Ekip: kaydırdıkça kişi değişir */}
+      <TeamScroll team={TEAM} />
 
       <ScrollLine d={CTA_LINE} view={[1440, 766]}>
       <Container className="py-32 md:py-48">

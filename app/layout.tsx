@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Inter_Tight } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SITE } from "@/lib/site";
@@ -9,13 +9,6 @@ const inter = Inter_Tight({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500"],
   variable: "--font-inter-tight",
-  display: "swap",
-});
-
-const plex = IBM_Plex_Mono({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
-  variable: "--font-plex-mono",
   display: "swap",
 });
 
@@ -33,11 +26,12 @@ export const metadata: Metadata = {
     title: "Marki Labs — Teknoloji stüdyosu",
     description,
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr" className={`${inter.variable} ${plex.variable}`}>
+    <html lang="tr" className={inter.variable}>
       <body>
         <Header />
         <main>{children}</main>

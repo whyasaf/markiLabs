@@ -10,7 +10,6 @@
   --color-navy: #002c60;
 
   --font-sans: var(--font-inter-tight), system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
 html {
@@ -40,12 +39,13 @@ body {
   }
 }
 
-/* Lusion tarzı küçük etiket: mono, büyük harf */
+/* Küçük etiket: ana font, normal yazılış */
 .label {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -92,3 +92,9 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .scale-in { transform: none !important; }
 }
+
+/* Ekip portreleri: mavi ton (duotone), üzerine gelince gerçek renk */
+.duo-portrait img { filter: grayscale(1) contrast(1.1) brightness(1.08); mix-blend-mode: multiply; transition: filter .6s ease; }
+.duo-portrait .duo-tint { opacity: .7; transition: opacity .6s ease; }
+.duo-portrait:hover img { filter: none; mix-blend-mode: normal; }
+.duo-portrait:hover .duo-tint { opacity: 0; }

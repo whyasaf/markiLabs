@@ -49,8 +49,8 @@ export default function Home() {
                 <Pill href="#yaklasim" tone="light">
                   Yaklaşımımız
                 </Pill>
-                <Pill href="#isler" tone="ghost">
-                  İşlerimiz
+                <Pill href="/hizmetler" tone="ghost">
+                  Hizmetlerimiz
                 </Pill>
               </div>
             </Reveal>

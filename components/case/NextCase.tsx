@@ -12,7 +12,7 @@ export default function NextCase({ current, radius = 0 }: { current: string; rad
         className="group flex min-h-[340px] flex-col justify-between p-8 md:p-14"
         style={{ background: n.bg, color: n.fg, borderRadius: radius }}
       >
-        <span className="text-[13px] font-semibold uppercase tracking-[0.2em]" style={{ color: n.accent }}>
+        <span className="text-[16px] font-medium tracking-[-0.01em]" style={{ color: n.accent }}>
           Sıradaki proje
         </span>
         <span className="flex flex-wrap items-end justify-between gap-6">
