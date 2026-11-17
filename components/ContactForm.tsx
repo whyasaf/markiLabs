@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowCircle, FillBubble } from "@/components/Arrow";
 import { SITE } from "@/lib/site";
 
@@ -20,15 +21,68 @@ const DEMO_NOTES = [
 ];
 
 /** running iken her `ms`'de bir sonraki örneğe geçer; hareketi azaltanlarda durur. */
-function useRotate(length: number, running: boolean, ms: number) {
+/** Sırayla dönen örnek; ilk değişim `first` ms sonra (sayfa açılınca uzun beklenmesin), sonra her `ms`'de bir */
+function useRotate(length: number, running: boolean, ms: number, first = ms) {
   const [i, setI] = useState(0);
   useEffect(() => {
     if (!running) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = window.setInterval(() => setI((x) => (x + 1) % length), ms);
-    return () => window.clearInterval(t);
-  }, [length, running, ms]);
+    let t = 0;
+    const next = () => setI((x) => (x + 1) % length);
+    const f = window.setTimeout(() => {
+      next();
+      t = window.setInterval(next, ms);
+    }, first);
+    return () => {
+      window.clearTimeout(f);
+      window.clearInterval(t);
+    };
+  }, [length, running, ms, first]);
   return i;
+}
+
+const SWAP_EASE = [0.22, 1, 0.36, 1] as const;
+
+/**
+ * Kutunun genişliği, içindeki görünmez ayna metnin genişliğini izler. Örnekler dönerken yumuşakça kayar
+ * (cümlenin geri kalanı zıplamasın), kullanıcı yazarken anında uyar. Ayna akışta kalır ve kutunun
+ * yüksekliğini verir; inline-block olduğu için genişliği kutudan bağımsız, metnin kendi genişliğidir.
+ */
+function useSmoothWidth(smooth: boolean) {
+  const box = useRef<HTMLSpanElement>(null);
+  const mirror = useRef<HTMLSpanElement>(null);
+  useLayoutEffect(() => {
+    const b = box.current, m = mirror.current;
+    if (!b || !m) return;
+    const fit = () => (b.style.width = `${m.offsetWidth}px`);
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(m);
+    return () => ro.disconnect();
+  }, []);
+  useLayoutEffect(() => {
+    if (box.current) box.current.style.transition = smooth ? "width 0.7s cubic-bezier(0.22, 1, 0.36, 1)" : "none";
+  }, [smooth]);
+  return { box, mirror };
+}
+
+/** Dönen örnek yazı: eskisi yukarı kayıp solarken yenisi alttan gelir (ikisi üst üste, aynı anda) */
+function SwapText({ text, className = "" }: { text: string; className?: string }) {
+  const reduce = useReducedMotion();
+  return (
+    <AnimatePresence initial={!reduce}>
+      <motion.span
+        key={text}
+        className={`absolute left-0 top-0 block ${className}`}
+        initial={{ y: "70%", opacity: 0 }}
+        animate={{ y: "0%", opacity: 1 }}
+        exit={{ y: "-70%", opacity: 0 }}
+        transition={reduce ? { duration: 0 } : { duration: 0.8, ease: SWAP_EASE }}
+      >
+        {text}
+      </motion.span>
+    </AnimatePresence>
+  );
 }
 
 /**
@@ -40,7 +94,8 @@ function TopicPicker({ value, onChange, blank }: { value: string | null; onChang
   const [active, setActive] = useState(0);
   const wrap = useRef<HTMLSpanElement>(null);
   const listId = useId();
-  const demo = useRotate(TOPICS.length, !value && !open, 2700);
+  const demo = useRotate(TOPICS.length, !value && !open, 2800, 1500);
+  const { box: topicBox, mirror: topicMirror } = useSmoothWidth(!value);
 
   useEffect(() => {
     if (!open) return;
@@ -92,8 +147,15 @@ function TopicPicker({ value, onChange, blank }: { value: string | null; onChang
         onKeyDown={onKey}
         className={`${blank} inline-flex cursor-pointer items-baseline gap-[0.2em] overflow-hidden text-left`}
       >
-        <span key={value ? "secili" : demo} className={value ? undefined : "name-swap text-blue/35"}>
-          {shown}
+        <span ref={topicBox} className="relative inline-block">
+          <span ref={topicMirror} aria-hidden className="invisible inline-block whitespace-pre">
+            {shown}
+          </span>
+          {value ? (
+            <span className="absolute left-0 top-0 whitespace-pre">{value}</span>
+          ) : (
+            <SwapText text={shown} className="whitespace-pre text-blue/35" />
+          )}
         </span>
         <span aria-hidden className={`text-[0.5em] text-blue/60 transition-transform duration-300 ${open ? "rotate-180" : ""}`}>
           ▼
@@ -140,8 +202,9 @@ export default function ContactForm() {
   const [error, setError] = useState(false);
 
   // Üç alan aynı anda değişmesin diye farklı hızlarda döner
-  const demoName = useRotate(DEMO_NAMES.length, !name && !nameFocused, 2000);
-  const demoNote = useRotate(DEMO_NOTES.length, !note && !noteFocused, 3400);
+  const demoName = useRotate(DEMO_NAMES.length, !name && !nameFocused, 2200, 900);
+  const { box: nameBox, mirror: nameMirror } = useSmoothWidth(!name && !nameFocused);
+  const demoNote = useRotate(DEMO_NOTES.length, !note && !noteFocused, 3600, 2100);
 
   const ready = name.trim().length > 0 && note.trim().length > 0;
   const t = topic ?? TOPIC_FALLBACK;
@@ -176,8 +239,8 @@ export default function ContactForm() {
         <label className="sr-only" htmlFor="ad">
           Adınız
         </label>
-        <span className="relative inline-block max-w-full align-baseline">
-          <span aria-hidden className="invisible whitespace-pre border-b-[3px] border-transparent px-1">
+        <span ref={nameBox} className="relative inline-block max-w-full align-baseline">
+          <span ref={nameMirror} aria-hidden className="invisible inline-block whitespace-pre border-b-[3px] border-transparent px-1">
             {name || (nameFocused ? "adınız" : DEMO_NAMES[demoName])}
           </span>
           <input
@@ -192,10 +255,8 @@ export default function ContactForm() {
             className={`${blank} absolute inset-0 w-full min-w-0`}
           />
           {!name && !nameFocused && (
-            <span aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden px-1">
-              <span key={demoName} className="name-swap block whitespace-pre text-blue/35">
-                {DEMO_NAMES[demoName]}
-              </span>
+            <span aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+              <SwapText text={DEMO_NAMES[demoName]} className="whitespace-pre px-1 text-blue/35" />
             </span>
           )}
         </span>
@@ -218,9 +279,7 @@ export default function ContactForm() {
           />
           {!note && !noteFocused && (
             <span aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden px-1 leading-[1.25]">
-              <span key={demoNote} className="name-swap block text-blue/35">
-                {DEMO_NOTES[demoNote]}
-              </span>
+              <SwapText text={DEMO_NOTES[demoNote]} className="right-0 px-1 text-blue/35" />
             </span>
           )}
         </span>

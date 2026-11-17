@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform, type MotionStyle, type MotionValue } from "framer-motion";
 import type { Member } from "@/data/team";
 
 /**
@@ -115,7 +115,10 @@ function Person({ m, i, n, p, mobile }: { m: Member; i: number; n: number; p: Mo
     (v) => `inset(${(1 - out(enterOf(v, i))) * 100}% 0% ${inOut(leaveOf(v, i, n)) * 100}% 0% round 24px)`,
   );
   const imgScale = useTransform(s, (v) => 1.12 + 0.12 * (1 - out(enterOf(v, i))));
-  const imgX = useTransform(s, (v) => (mobile ? "0%" : `${-dir * (inOut(travel(v)) - 0.5) * 6}%`));
+  // Mavi ton: portre küçükken tam, büyüdükçe çekilir, büyük halde gerçek renk (globals.css .duo-portrait)
+  const duo = useTransform(s, (v) => 1 - inOut(travel(v)));
+  // Kayarken hafifçe ters yöne gider; başta ve sonda tam ortada durur (sin: uçlarda 0, ortada en fazla)
+  const imgX = useTransform(s, (v) => (mobile ? "0%" : `${-dir * Math.sin(Math.PI * travel(v)) * 4}%`));
 
   // Giriş satırları (ad, soyad, rol): sıradakiyse alttan yükselir; portre geçerken yana itilir (mobilde yukarı)
   // Masaüstünde itme gerçek: satır, portrenin ilerleyen kenarı ona değdiği anda onunla birlikte kayar
@@ -142,8 +145,8 @@ function Person({ m, i, n, p, mobile }: { m: Member; i: number; n: number; p: Mo
     <>
       {/* Portre */}
       <motion.div
-        style={{ left, top, width, height, clipPath, zIndex: 10 + i }}
-        className="duo-portrait group absolute overflow-hidden rounded-[24px] bg-[#bcc4ff]"
+        style={{ left, top, width, height, clipPath, zIndex: 10 + i, "--duo": duo } as MotionStyle}
+        className="duo-portrait group absolute overflow-hidden rounded-[24px]"
       >
         <motion.div style={{ scale: imgScale, x: imgX }} className="absolute inset-0">
           {m.photo ? (

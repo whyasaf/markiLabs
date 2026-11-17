@@ -4,6 +4,10 @@ import Link from "next/link";
 import LazyVideo from "@/components/LazyVideo";
 import { ScaleIn } from "@/components/CardReveal";
 
+// Kartlarda videonun hafif kopyası oynar (960px, 24 kare; public/videos/*-card.mp4). Proje sayfalarındaki
+// büyük gösterimler asıl dosyayı kullanır. Aynı anda birkaç kart oynadığı için fark büyük.
+const cardVideo = (src: string) => src.replace(/\.mp4$/, "-card.mp4");
+
 type Props = {
   href: string;
   title: string;
@@ -21,7 +25,7 @@ export default function WorkCard({ href, title, tags, status, external, video, i
     <div className="relative aspect-[16/10] overflow-hidden rounded-[20px] bg-white">
       <div className="h-full w-full transition-transform duration-[900ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.04]">
         {video ? (
-          <LazyVideo src={video.src} poster={video.poster} className="h-full w-full object-cover" />
+          <LazyVideo src={cardVideo(video.src)} poster={video.poster} className="h-full w-full object-cover" />
         ) : image ? (
           <Image src={image} alt="" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover object-top" />
         ) : null}

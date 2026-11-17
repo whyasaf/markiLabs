@@ -1,10 +1,12 @@
 import type { MetadataRoute } from "next";
 import { CASES } from "@/data/cases";
+import { LOCALES, localePath } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
 
+/** Her sayfa iki dilde; her kayıt diğer dildeki karşılığını da bildirir (hreflang) */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = [
-    "",
+  const internal = [
+    "/",
     "/hizmetler",
     "/hakkimizda",
     "/iletisim",
@@ -13,5 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/gizlilik",
     "/kosullar",
   ];
-  return paths.map((p) => ({ url: `${SITE.url}${p}`, lastModified: new Date() }));
+  const abs = (p: string) => `${SITE.url}${p === "/" ? "" : p}`;
+  return internal.flatMap((p) =>
+    LOCALES.map((lang) => ({
+      url: abs(localePath(lang, p)),
+      lastModified: new Date(),
+      alternates: { languages: { tr: abs(localePath("tr", p)), en: abs(localePath("en", p)) } },
+    })),
+  );
 }

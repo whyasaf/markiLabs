@@ -18,6 +18,7 @@
 # iCloud Masaüstü eşitlemesinden kaçmak için: .next -> .next.nosync kısayolu (yerel)
 .next
 /.next.nosync/
+/.next-build.nosync/
 /out/
 
 # production

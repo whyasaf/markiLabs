@@ -6,9 +6,10 @@ export const SITE = {
   whatsappLabel: "+90 536 785 74 57",
 };
 
+/** Üst menü: etiketler sözlükten (nav.<key>), adresler iç adres (localePath ile dile çevrilir) */
 export const NAV = [
-  { label: "Projeler", href: "/#isler" },
-  { label: "Hizmetler", href: "/hizmetler" },
-  { label: "Hakkımızda", href: "/hakkimizda" },
-];
+  { key: "projects", href: "/#isler" },
+  { key: "services", href: "/hizmetler" },
+  { key: "about", href: "/hakkimizda" },
+] as const;
 

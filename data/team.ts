@@ -17,7 +17,8 @@ export const TEAM: Member[] = [
     last: "Ak",
     role: "Yazılım & Ürün",
     bio: "Bir uygulamanın çalışması ona yetmiyor; neden çalıştığını ve büyüdüğünde de çalışıp çalışmayacağını önemsiyor. İstanbul Üniversitesi'nde Bilgisayar Programcılığı'nı bitirdi, şimdi De Montfort University Dubai'de Yazılım Mühendisliği okuyor. Grafik tasarımdan geldiği için kod yazmadan önce ürünü kullanacak kişiyi düşünüyor; bugünlerde yapay zekâ ürünleri, Next.js ve TypeScript ile uğraşıyor.",
-    photo: "/work/whyasaf/avatar.webp",
+    // Yüz ortada olsun diye kırpılmış kopya (asıl dosya: whyasaf.jpeg)
+    photo: "/team/omer/omer.jpg",
     links: [
       { label: "whyasaf.com", href: "https://whyasaf.com" },
       { label: "GitHub", href: "https://github.com/whyasaf" },
@@ -27,10 +28,9 @@ export const TEAM: Member[] = [
   {
     first: "Burak",
     last: "Duru",
-    role: "Marka & Pazarlama",
-    // TODO: Burak'ın kendi bio'su ve fotoğrafı gelecek
-    bio: "Bio gelecek.",
+    role: "Tasarım ve Dijital Pazarlama",
+    bio: "Markaların dijital dünyada güçlü bir kimlik kazanması için yaratıcı tasarım ve etkili pazarlama çözümleri sunuyor. Marka kimliği, görsel tasarım ve Google Ads alanlarında profesyonel yaklaşımla markaların görünürlüğünü ve değerini artırmayı hedefliyor. Estetik, strateji ve yaratıcılığı bir araya getirerek markalara özgün çözümler üretiyor.",
     links: [],
-    focus: ["Marka kimliği", "Dijital pazarlama", "Google ADS"],
+    focus: ["Marka kimliği", "Dijital pazarlama", "Google Ads"],
   },
 ];

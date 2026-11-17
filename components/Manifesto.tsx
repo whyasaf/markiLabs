@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionStyle, type MotionValue } from "framer-motion";
 
 type Token = { text: string; accent?: boolean };
 
@@ -9,9 +9,16 @@ function Word({ token, i, n, progress }: { token: Token; i: number; n: number; p
   const start = i / n;
   const opacity = useTransform(progress, [start, start + 1 / n], [0.14, 1]);
   return (
-    <motion.span style={{ opacity }} className={token.accent ? "text-blue" : undefined}>
-      {token.text}{" "}
-    </motion.span>
+    <>
+      <span className="rise-mask">
+        <motion.span
+          style={{ opacity, "--d": `${0.15 + Math.min(i, 24) * 0.03}s` } as MotionStyle}
+          className={`rise${token.accent ? " text-blue" : ""}`}
+        >
+          {token.text}
+        </motion.span>
+      </span>{" "}
+    </>
   );
 }
 
