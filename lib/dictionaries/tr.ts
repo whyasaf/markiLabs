@@ -31,6 +31,64 @@ export const tr = {
     privacy: "Gizlilik",
     terms: "Koşullar",
   },
+  hero: {
+    /** Açılış başlığı iki satır: üst satır sola, alt satır sağa kayar */
+    top: "Fikirleri çalışan",
+    bottom: "ürünlere dönüştürüyoruz.",
+    corner: "Marki Labs; web, yazılım ve marka tasarımı yapan bir teknoloji stüdyosu.",
+    scroll: "Kaydırarak keşfet",
+  },
+  reel: {
+    /** Videonun içindeki yazılar da dile göre (kaynak: assets/reel) */
+    src: "/videos/marki-reel.mp4",
+    poster: "/videos/marki-reel-poster.jpg",
+    label: "Marki Labs tanıtım videosu",
+    pause: "Durdur",
+    play: "Oynat",
+  },
+  home: {
+    introTop: "Fikirden ürüne,",
+    introBottom: "tek ekip.",
+    introText:
+      "Tasarımı, yazılımı ve yayına almayı aynı ekip yapıyor. Kendi ürünlerimizi geliştirirken kullandığımız yöntemleri müşteri işlerimizde de kullanıyoruz.",
+    approachLink: "Yaklaşımımız",
+    servicesLink: "Hizmetlerimiz",
+    featuredTitle: "Öne çıkan işler",
+    featuredText: "Kendi ürünlerimiz ve müşterilerimiz için tasarlayıp geliştirdiğimiz işlerden bir seçki.",
+    nextLabel: "Sıradaki proje",
+    yoursTop: "Burada sizin",
+    yoursBottom: "projeniz olabilir.",
+    approachLabel: "Yaklaşımımız",
+    approach1:
+      "Hiçbir iş bir şablondan çıkmıyor. Bir yol yardım firması da, bir eğitim sistemi de kendi fontu, rengi ve diliyle konuşuyor.",
+    approach2:
+      "Kendi ürünlerimizi de yayına alıyoruz; Lecmic açık kaynak, CodeVocab ücretsiz. Müşteri işlerine de bir ürün gibi bakıyoruz.",
+    /** Kapanış başlığı: ikinci parça mavi */
+    closingA: "Büyük fikrin ",
+    closingB: "hazır mı?",
+    cta: "Birlikte çalışalım!",
+  },
+  services: {
+    /** *kelime* mavi */
+    title: "Ne yaptığımızı *işlerimiz* *anlatsın.*",
+    blocks: {
+      products: {
+        title: "Ürün geliştiriyoruz.",
+        text: "Fikirden başlayıp herkesin kullanabildiği web uygulamalarına kadar götürüyoruz. Lecmic açık kaynak, CodeVocab ücretsiz; Plus Otoyol'un geliştirmesi sürüyor.",
+      },
+      websites: {
+        title: "Web siteleri kuruyoruz.",
+        text: "Bir yol yardım firmasından bir eğitim sistemine, her işletmenin kendi diliyle konuşan siteler. Her biri kendi fontu, rengi ve düzeniyle.",
+      },
+      templates: {
+        title: "Şablon hazırlıyoruz.",
+        text: "Belli bir sektör için baştan sona hazırlanmış, kendi markanızla yayına alınabilecek siteler. İlki mimarlık ve yapı firmaları için Vitren Yapı.",
+      },
+    },
+    closingA: "Sıradaki iş ",
+    closingB: "sizinki olsun.",
+    cta: "Birlikte çalışalım!",
+  },
   caseStudy: {
     next: "Sıradaki proje",
   },

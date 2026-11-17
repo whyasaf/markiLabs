@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import HeroTrail from "@/components/HeroTrail";
-import Reel from "@/components/Reel";
+import Reel, { type ReelText } from "@/components/Reel";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -32,7 +32,19 @@ function Words({ text, delay, reduce }: { text: string; delay: number; reduce: b
  * Hero: başlık iki satır, ortada video. Kaydırınca üst satır sola, alt satır sağa kayıp ayrılır;
  * aralarından video oranını koruyarak büyüyüp ekranı kaplar. Bölüm ekrana yapışık kalır.
  */
-export default function HeroSplit({ src, poster }: { src: string; poster: string }) {
+export type HeroText = { top: string; bottom: string; corner: string; scroll: string };
+
+export default function HeroSplit({
+  src,
+  poster,
+  t,
+  reel,
+}: {
+  src: string;
+  poster: string;
+  t: HeroText;
+  reel: ReelText;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
@@ -88,14 +100,14 @@ export default function HeroSplit({ src, poster }: { src: string; poster: string
             transition={reduce ? { duration: 0 } : { duration: 1.1, delay: 0.55, ease: EASE }}
           >
             <motion.div style={{ width, height, borderRadius: radius }} className="overflow-hidden">
-              <Reel src={src} poster={poster} fill />
+              <Reel src={src} poster={poster} t={reel} fill />
             </motion.div>
           </motion.div>
         </div>
 
         {/* Üst satır: sola kayar */}
         <motion.h1 style={{ x: leftX }} className={`absolute left-4 top-[calc(76px+5vh)] z-10 md:left-8 ${title}`}>
-          <Words text="Fikirleri çalışan" delay={0.1} reduce={reduce} />
+          <Words text={t.top} delay={0.1} reduce={reduce} />
         </motion.h1>
 
         {/* Alt satır: sağa kayar */}
@@ -104,17 +116,17 @@ export default function HeroSplit({ src, poster }: { src: string; poster: string
           style={{ x: rightX }}
           className={`absolute bottom-[14vh] right-4 z-10 text-right md:right-8 ${title}`}
         >
-          <Words text="ürünlere dönüştürüyoruz." delay={0.3} reduce={reduce} />
+          <Words text={t.bottom} delay={0.3} reduce={reduce} />
         </motion.p>
         {/* Ekran okuyucular için başlığın tamamı tek parça */}
-        <span className="sr-only">Fikirleri çalışan ürünlere dönüştürüyoruz.</span>
+        <span className="sr-only">{`${t.top} ${t.bottom}`}</span>
 
         {/* Köşe yazıları */}
         <motion.p style={{ opacity: fade }} className="absolute bottom-6 left-4 -z-[1] max-w-[380px] text-[16px] text-muted md:left-8">
-          Marki Labs; web, yazılım ve marka tasarımı yapan bir teknoloji stüdyosu.
+          {t.corner}
         </motion.p>
         <motion.span style={{ opacity: fade }} className="label absolute bottom-6 right-4 -z-[1] text-muted md:right-8">
-          Kaydırarak keşfet
+          {t.scroll}
         </motion.span>
       </HeroTrail>
     </div>

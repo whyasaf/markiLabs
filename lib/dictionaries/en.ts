@@ -29,6 +29,60 @@ export const en: Dict = {
     privacy: "Privacy",
     terms: "Terms",
   },
+  hero: {
+    top: "We turn ideas",
+    bottom: "into working products.",
+    corner: "Marki Labs is a technology studio for web, software and brand design.",
+    scroll: "Scroll to explore",
+  },
+  reel: {
+    src: "/videos/marki-reel-en.mp4",
+    poster: "/videos/marki-reel-en-poster.jpg",
+    label: "Marki Labs showreel",
+    pause: "Pause",
+    play: "Play",
+  },
+  home: {
+    introTop: "Idea to product,",
+    introBottom: "one team.",
+    introText:
+      "Design, code and launch are all handled by the same team. The methods we use to build our own products are the ones we bring to client work.",
+    approachLink: "Our approach",
+    servicesLink: "Our services",
+    featuredTitle: "Featured work",
+    featuredText: "A selection of work we've designed and built, for our own products and for clients.",
+    nextLabel: "Next project",
+    yoursTop: "Your project",
+    yoursBottom: "could be here.",
+    approachLabel: "Our approach",
+    approach1:
+      "Nothing we make comes out of a template. A roadside assistance company and an education programme each speak with their own typeface, colour and voice.",
+    approach2:
+      "We ship our own products too: Lecmic is open source and CodeVocab is free. We treat client work the same way, like a product.",
+    closingA: "Got a ",
+    closingB: "big idea?",
+    cta: "Let's work together!",
+  },
+  services: {
+    title: "Let *our* *work* *do* *the* *talking.*",
+    blocks: {
+      products: {
+        title: "We build products.",
+        text: "We take ideas all the way to web apps anyone can use. Lecmic is open source, CodeVocab is free, and Plus Otoyol is in development.",
+      },
+      websites: {
+        title: "We build websites.",
+        text: "From a roadside assistance company to an education programme: sites that speak in each business's own voice, each with its own typeface, colour and layout.",
+      },
+      templates: {
+        title: "We make templates.",
+        text: "Complete websites built for a specific industry, ready to launch under your own brand. The first is Vitren Yapı, for architecture and construction firms.",
+      },
+    },
+    closingA: "Make the next one ",
+    closingB: "yours.",
+    cta: "Let's work together!",
+  },
   caseStudy: {
     next: "Next project",
   },

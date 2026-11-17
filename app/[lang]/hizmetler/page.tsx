@@ -6,14 +6,20 @@ import { Container, Label, Pill } from "@/components/ui";
 import { PROJECTS } from "@/data/projects";
 import { WORK } from "@/data/work";
 import { getDict, pageMetadata, resolveLang } from "@/lib/dictionaries";
-import { localePath } from "@/lib/i18n";
+import { localePath, type Locale } from "@/lib/i18n";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
   const lang = await resolveLang(params);
   return pageMetadata(lang, "/hizmetler", getDict(lang).meta.pages.services);
 }
 
-type Card = { href: string; title: string; tags: string[]; video: { src: string; poster: string }; status?: string };
+type Card = {
+  href: string;
+  title: string;
+  tags: Record<Locale, string[]>;
+  video: { src: string; poster: string };
+  status?: Record<Locale, string>;
+};
 
 const fromProject = (slug: string): Card => {
   const p = PROJECTS.find((x) => x.slug === slug)!;
@@ -24,35 +30,25 @@ const fromWork = (slug: string): Card => {
   return { href: `/projeler/${w.slug}`, title: w.name, tags: w.tags, video: w.video, status: w.status };
 };
 
-// Ne yaptığımızı liste yerine yayındaki işlerle anlatıyoruz.
+// Ne yaptığımızı liste yerine yayındaki işlerle anlatıyoruz. Başlık ve metinler sözlükte (services.blocks).
 const BLOCKS = [
-  {
-    no: "01",
-    title: "Ürün geliştiriyoruz.",
-    text: "Fikirden başlayıp herkesin kullanabildiği web uygulamalarına kadar götürüyoruz. Lecmic açık kaynak, CodeVocab ücretsiz; Plus Otoyol'un geliştirmesi sürüyor.",
-    cards: [fromProject("lecmic"), fromProject("codevocab"), fromWork("plus-otoyol")],
-  },
+  { no: "01", key: "products", cards: [fromProject("lecmic"), fromProject("codevocab"), fromWork("plus-otoyol")] },
   {
     no: "02",
-    title: "Web siteleri kuruyoruz.",
-    text: "Bir yol yardım firmasından bir eğitim sistemine, her işletmenin kendi diliyle konuşan siteler. Her biri kendi fontu, rengi ve düzeniyle.",
+    key: "websites",
     cards: [fromWork("neon-oto-kurtarma"), fromWork("cultivated-voice-system"), fromWork("whyasaf")],
   },
-  {
-    no: "03",
-    title: "Şablon hazırlıyoruz.",
-    text: "Belli bir sektör için baştan sona hazırlanmış, kendi markanızla yayına alınabilecek siteler. İlki mimarlık ve yapı firmaları için Vitren Yapı.",
-    cards: [fromWork("vitren-yapi")],
-  },
-];
+  { no: "03", key: "templates", cards: [fromWork("vitren-yapi")] },
+] as const;
 
 export default async function HizmetlerPage({ params }: { params: Promise<{ lang: string }> }) {
   const lang = await resolveLang(params);
+  const t = getDict(lang).services;
   return (
     <>
       <Container className="pt-16 md:pt-24">
         <h1 className="max-w-[1100px] text-[clamp(48px,7.4vw,112px)] font-medium leading-[0.98] tracking-[-0.05em]">
-          <RiseWords text="Ne yaptığımızı *işlerimiz* *anlatsın.*" delay={0.1} step={0.07} />
+          <RiseWords text={t.title} delay={0.1} step={0.07} />
         </h1>
       </Container>
 
@@ -62,15 +58,22 @@ export default async function HizmetlerPage({ params }: { params: Promise<{ lang
             <div className="grid gap-8 border-t border-line pt-10 md:grid-cols-[1fr_1fr] md:gap-20">
               <Reveal>
                 <Label className="text-muted">{b.no}</Label>
-                <h2 className="mt-4 text-[clamp(44px,5.6vw,88px)] font-medium leading-[1] tracking-[-0.05em]">{b.title}</h2>
+                <h2 className="mt-4 text-[clamp(44px,5.6vw,88px)] font-medium leading-[1] tracking-[-0.05em]">{t.blocks[b.key].title}</h2>
               </Reveal>
               <Reveal delay={0.08} className="md:pt-10">
-                <p className="max-w-[520px] text-[clamp(19px,1.6vw,23px)] leading-[1.5]">{b.text}</p>
+                <p className="max-w-[520px] text-[clamp(19px,1.6vw,23px)] leading-[1.5]">{t.blocks[b.key].text}</p>
               </Reveal>
             </div>
             <div className={`mt-12 grid gap-x-4 gap-y-12 ${b.cards.length > 1 ? "md:grid-cols-2 lg:grid-cols-3" : "md:grid-cols-2"}`}>
               {b.cards.map((c) => (
-                <WorkCard key={c.href} href={localePath(lang, c.href)} title={c.title} tags={c.tags} video={c.video} status={c.status} />
+                <WorkCard
+                  key={c.href}
+                  href={localePath(lang, c.href)}
+                  title={c.title}
+                  tags={c.tags[lang]}
+                  video={c.video}
+                  status={c.status?.[lang]}
+                />
               ))}
             </div>
           </Container>
@@ -81,11 +84,12 @@ export default async function HizmetlerPage({ params }: { params: Promise<{ lang
         <Reveal>
           <div className="rounded-[24px] bg-white px-6 py-24 text-center md:py-32">
             <h2 className="mx-auto max-w-[900px] text-[clamp(44px,6.4vw,100px)] font-medium leading-[0.98] tracking-[-0.05em]">
-              Sıradaki iş <span className="text-blue">sizinki olsun.</span>
+              {t.closingA}
+              <span className="text-blue">{t.closingB}</span>
             </h2>
             <div className="mt-12 flex justify-center">
               <Pill href={localePath(lang, "/iletisim")} tone="blue">
-                Birlikte çalışalım!
+                {t.cta}
               </Pill>
             </div>
           </div>
