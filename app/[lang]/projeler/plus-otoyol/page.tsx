@@ -5,6 +5,8 @@ import Reveal from "@/components/Reveal";
 import Browser from "@/components/case/Browser";
 import NextCase from "@/components/case/NextCase";
 import LazyVideo from "@/components/LazyVideo";
+import Rich from "@/components/case/Rich";
+import { COPY } from "./copy";
 import { getDict, pageMetadata, resolveLang } from "@/lib/dictionaries";
 
 // Plus Otoyol'un kimliği: Inter + italik serif alt yazı, yeşil #16a34a, gece mavisi yol.
@@ -19,10 +21,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   return pageMetadata(lang, "/projeler/plus-otoyol", { title: "Plus Otoyol", description: getDict(lang).meta.projects["plus-otoyol"] });
 }
 
-const TOPICS = ["Rotalar", "Yollar", "Molalar", "Yakıt"];
-
 export default async function PlusPage({ params }: { params: Promise<{ lang: string }> }) {
   const lang = await resolveLang(params);
+  const c = COPY[lang];
   return (
     <div className={`${inter.variable} ${serif.variable}`} style={{ fontFamily: "var(--p-sans)", color: "#1f2937" }}>
       <style>{`body{background:#fff}`}</style>
@@ -32,16 +33,23 @@ export default async function PlusPage({ params }: { params: Promise<{ lang: str
         <Reveal>
           <span className="inline-flex items-center gap-2.5 rounded-full px-4 py-2 text-[13px] font-semibold uppercase tracking-[0.1em]" style={{ background: "#f0fdf4", color: GREEN }}>
             <span className="h-2 w-2 animate-pulse rounded-full" style={{ background: GREEN }} />
-            Geliştiriliyor
+            {c.status}
           </span>
           <div className="mt-12 flex justify-center">
-            <Image src="/work/plus/logo.png" alt="Plus Otoyol — Türkiye'nin Ulaşım Asistanı" width={1000} height={330} className="h-auto w-[min(86vw,560px)]" priority />
+            <Image src="/work/plus/logo.png" alt={c.logoAlt} width={1000} height={330} className="h-auto w-[min(86vw,560px)]" priority />
           </div>
           <h1 className="mx-auto mt-14 max-w-[900px] text-[clamp(48px,7vw,104px)] font-extrabold leading-[1] tracking-[-0.045em]">
-            Yolculuğunuzun <em className="font-medium tracking-[-0.01em]" style={{ fontFamily: "var(--p-serif)", color: GREEN }}>yeni adresi.</em>
+            <Rich
+              text={c.h1}
+              em={(s) => (
+                <em className="font-medium tracking-[-0.01em]" style={{ fontFamily: "var(--p-serif)", color: GREEN }}>
+                  {s}
+                </em>
+              )}
+            />
           </h1>
           <p className="mx-auto mt-8 max-w-[520px] text-[19px] italic leading-[1.6] text-[#4b5563]" style={{ fontFamily: "var(--p-serif)" }}>
-            Rotalar, yollar, molalar, yakıt ve daha fazlası. Plus Otoyol üzerinde çalışıyoruz.
+            {c.sub}
           </p>
           <a
             href="https://plusotoyol.com"
@@ -60,11 +68,11 @@ export default async function PlusPage({ params }: { params: Promise<{ lang: str
         <div className="relative z-10 mx-auto max-w-[1200px] text-center">
           <Reveal>
             <p className="text-[13px] font-semibold uppercase tracking-[0.2em]" style={{ color: "#4ade80" }}>
-              Üzerinde çalışılanlar
+              {c.workingOn}
             </p>
           </Reveal>
           <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-4">
-            {TOPICS.map((t, i) => (
+            {c.topics.map((t, i) => (
               <Reveal key={t} delay={i * 0.08}>
                 <p className="text-[clamp(40px,5.4vw,84px)] font-extrabold tracking-[-0.045em]" style={{ color: i % 2 ? "#4ade80" : "#fff" }}>
                   {t}.
@@ -74,7 +82,7 @@ export default async function PlusPage({ params }: { params: Promise<{ lang: str
           </div>
           <Reveal delay={0.3}>
             <p className="mt-4 text-[clamp(28px,3vw,44px)] italic text-[#cbd5e1]" style={{ fontFamily: "var(--p-serif)" }}>
-              ve daha fazlası.
+              {c.more}
             </p>
           </Reveal>
         </div>
@@ -112,13 +120,13 @@ export default async function PlusPage({ params }: { params: Promise<{ lang: str
             <div className="mt-16 grid items-center gap-10 md:grid-cols-[1fr_1.2fr]">
               <div>
                 <p className="text-[13px] font-semibold uppercase tracking-[0.2em]" style={{ color: GREEN }}>
-                  Şu anki durum
+                  {c.stateLabel}
                 </p>
                 <p className="mt-4 text-[clamp(28px,3vw,40px)] font-extrabold leading-[1.1] tracking-[-0.035em]">
-                  Ürün geliştirme aşamasında. Sitede şimdilik bir duyuru sayfası yayında.
+                  {c.state}
                 </p>
               </div>
-              <Browser src="/work/plus/screen-1.webp" alt="plusotoyol.com duyuru sayfası" url="plusotoyol.com" radius={14} />
+              <Browser src="/work/plus/screen-1.webp" alt={c.screenAlt} url="plusotoyol.com" radius={14} />
             </div>
           </Reveal>
         </div>

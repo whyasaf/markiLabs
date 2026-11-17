@@ -5,6 +5,7 @@ import Reveal from "@/components/Reveal";
 import Browser from "@/components/case/Browser";
 import NextCase from "@/components/case/NextCase";
 import LazyVideo from "@/components/LazyVideo";
+import { COPY } from "./copy";
 import { getDict, pageMetadata, resolveLang } from "@/lib/dictionaries";
 
 // Cultivated'ın kimliği: Playfair Display + Inter, lacivert #142640, altın #c9a646, ince altın çizgiler.
@@ -41,6 +42,7 @@ function GoldRule() {
 
 export default async function CultivatedPage({ params }: { params: Promise<{ lang: string }> }) {
   const lang = await resolveLang(params);
+  const c = COPY[lang];
   return (
     <div className={`${playfair.variable} ${inter.variable} text-[#fdfbf7]`} style={{ fontFamily: "var(--cv-sans)", background: NAVY }}>
       <style>{`body{background:${NAVY}}[data-site-logo]{filter:brightness(0) invert(1)}[data-site-cta]{background:${GOLD}!important;color:${NAVY}!important}`}</style>
@@ -67,8 +69,7 @@ export default async function CultivatedPage({ params }: { params: Promise<{ lan
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-10 max-w-[600px] text-[19px] leading-[1.65] text-[#cbd5e1]">
-              Akademik çalışma, özgüvenli iletişim ve etkili İngilizce için kurulmuş bir eğitim sistemi. IELTS, PTE ve
-              TOEFL gibi sınavlara hazırlıktan iş İngilizcesine uzanan programların tanıtım sitesi.
+              {c.intro}
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-6">
               <a
@@ -80,7 +81,7 @@ export default async function CultivatedPage({ params }: { params: Promise<{ lan
               >
                 Enter the system ↗
               </a>
-              <span className={`${eyebrow} text-[#94a3b8]`}>Web sitesi · Eğitim</span>
+              <span className={`${eyebrow} text-[#94a3b8]`}>{c.tags}</span>
             </div>
           </Reveal>
         </div>
@@ -114,7 +115,7 @@ export default async function CultivatedPage({ params }: { params: Promise<{ lan
           </h2>
         </Reveal>
         <Reveal delay={0.1} className="flex justify-center">
-          <Image src="/work/cultivated/seal.png" alt="The Cultivated Voice System mührü" width={500} height={500} className="w-[min(80vw,380px)]" />
+          <Image src="/work/cultivated/seal.png" alt={c.sealAlt} width={500} height={500} className="w-[min(80vw,380px)]" />
         </Reveal>
       </section>
 

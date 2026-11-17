@@ -5,6 +5,8 @@ import Reveal from "@/components/Reveal";
 import Browser from "@/components/case/Browser";
 import NextCase from "@/components/case/NextCase";
 import LazyVideo from "@/components/LazyVideo";
+import Rich from "@/components/case/Rich";
+import { COPY } from "./copy";
 import { getDict, pageMetadata, resolveLang } from "@/lib/dictionaries";
 
 // whyasaf.com'un kimliği: Playfair başlık + Inter italik metin + Caveat el yazısı, siyah #09090b, camgöbeği vurgu.
@@ -19,21 +21,13 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   return pageMetadata(lang, "/projeler/whyasaf", { title: "whyasaf.com", description: getDict(lang).meta.projects["whyasaf"] });
 }
 
-const SECTIONS = [
-  { k: "Hakkımda", d: "Eğitim geçmişi ve kullandığı teknolojiler." },
-  { k: "Projeler", d: "Lecmic ve Marki Labs gibi ürünler, tarih aralıklarıyla." },
-  { k: "Blog", d: "Blog yazıları." },
-  { k: "Seçkiler", d: "Kitap, film ve şarkı önerileri." },
-];
-
-const SCREENS = [
-  { src: "/work/whyasaf/screen-1.webp", label: "Eğitim ve projeler" },
-  { src: "/work/whyasaf/screen-2.webp", label: "Marki Labs" },
-  { src: "/work/whyasaf/screen-3.webp", label: "Seçkiler ve iletişim" },
-];
+// Ekran görüntüleri; altyazıları copy.ts'te aynı sırayla
+const SCREENS = ["/work/whyasaf/screen-1.webp", "/work/whyasaf/screen-2.webp", "/work/whyasaf/screen-3.webp"];
 
 export default async function WhyasafPage({ params }: { params: Promise<{ lang: string }> }) {
   const lang = await resolveLang(params);
+  const c = COPY[lang];
+  const cyan = (s: string) => <span style={{ color: CYAN }}>{s}</span>;
   return (
     <div
       className={`${playfair.variable} ${inter.variable} ${caveat.variable} bg-[#09090b] text-[#f4f4f5]`}
@@ -49,7 +43,7 @@ export default async function WhyasafPage({ params }: { params: Promise<{ lang: 
             <Image src="/work/whyasaf/logo.png" alt="WA.com" width={800} height={333} className="h-12 w-auto invert" />
           </div>
           <p className="mt-12 -rotate-3 text-[clamp(40px,4.4vw,64px)]" style={{ fontFamily: "var(--w-hand)", color: CYAN }}>
-            Merhaba, ben
+            {c.hello}
           </p>
           <h1 className="mt-2 text-[clamp(64px,11vw,176px)] leading-[0.95] tracking-[-0.03em]" style={{ fontFamily: "var(--w-serif)" }}>
             Ömer Asaf Ak<span style={{ color: CYAN }}>.</span>
@@ -57,8 +51,12 @@ export default async function WhyasafPage({ params }: { params: Promise<{ lang: 
         </Reveal>
         <Reveal delay={0.1}>
           <p className="mt-10 max-w-[760px] text-[clamp(20px,2vw,26px)] italic leading-[1.5] text-[#a1a1aa]">
-            Yazılım Geliştirici &amp; Tasarımcı <span style={{ color: CYAN }}>{"//"}</span> Kodu tasarım estetiğiyle
-            birleştiriyorum <span style={{ color: CYAN }}>{"//"}</span> Yapay zekâyı keşfedip dijital ürünler geliştiriyorum
+            {c.tagline.map((part, i) => (
+              <span key={part}>
+                {i > 0 && <span style={{ color: CYAN }}>{" // "}</span>}
+                {part}
+              </span>
+            ))}
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <a
@@ -69,7 +67,7 @@ export default async function WhyasafPage({ params }: { params: Promise<{ lang: 
             >
               whyasaf.com ↗
             </a>
-            <span className="text-[13px] uppercase tracking-[0.16em] text-[#71717a]">Web sitesi · Portfolyo</span>
+            <span className="text-[13px] uppercase tracking-[0.16em] text-[#71717a]">{c.tags}</span>
           </div>
         </Reveal>
       </section>
@@ -89,11 +87,12 @@ export default async function WhyasafPage({ params }: { params: Promise<{ lang: 
       <section className="mx-auto max-w-[1000px] px-6 py-28 text-center md:py-40">
         <Reveal>
           <p className="text-[clamp(28px,3.4vw,48px)] italic leading-[1.4] text-[#d4d4d8]">
-            &ldquo;Benim için bir projenin sadece <span style={{ color: CYAN }}>&lsquo;çalışması&rsquo;</span> yetmez; sağlam bir
-            temele ve kusursuz bir arayüze sahip olması gerekir.&rdquo;
+            &ldquo;
+            <Rich text={c.quote} em={cyan} />
+            &rdquo;
           </p>
           <p className="mt-8 text-[clamp(28px,3vw,40px)]" style={{ fontFamily: "var(--w-hand)", color: CYAN }}>
-            — whyasaf.com&apos;dan
+            {c.quoteSource}
           </p>
         </Reveal>
       </section>
@@ -102,7 +101,7 @@ export default async function WhyasafPage({ params }: { params: Promise<{ lang: 
       <section className="mx-auto max-w-[1000px] px-6">
         <Reveal>
           <div className="grid gap-3 sm:grid-cols-2">
-            {SECTIONS.map((s, i) => (
+            {c.sections.map((s, i) => (
               <div key={s.k} className="rounded-[20px] border border-[#27272a] bg-[#131316] p-7">
                 <span className="text-[13px] text-[#71717a]">0{i + 1}</span>
                 <h2 className="mt-3 text-[34px]" style={{ fontFamily: "var(--w-serif)" }}>
@@ -118,11 +117,11 @@ export default async function WhyasafPage({ params }: { params: Promise<{ lang: 
       {/* Ekranlar */}
       <section className="mx-auto max-w-[1200px] px-6 py-28 md:py-36">
         <div className="grid gap-6 md:grid-cols-2">
-          {SCREENS.map((s, i) => (
-            <Reveal key={s.src} delay={(i % 2) * 0.08} className={i === 0 ? "md:col-span-2" : ""}>
-              <Browser src={s.src} alt={s.label} url="whyasaf.com" dark radius={18} />
+          {SCREENS.map((src, i) => (
+            <Reveal key={src} delay={(i % 2) * 0.08} className={i === 0 ? "md:col-span-2" : ""}>
+              <Browser src={src} alt={c.screens[i]} url="whyasaf.com" dark radius={18} />
               <p className="mt-4 text-[26px]" style={{ fontFamily: "var(--w-hand)", color: CYAN }}>
-                {s.label}
+                {c.screens[i]}
               </p>
             </Reveal>
           ))}
