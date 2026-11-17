@@ -13,19 +13,20 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default async function IletisimPage({ params }: { params: Promise<{ lang: string }> }) {
   const lang = await resolveLang(params);
+  const t = getDict(lang).contact;
   return (
     <Container className="pb-32 pt-16 md:pt-24">
       <Label className="text-muted">
-        <RiseWords text="İletişim · boşlukları doldurun" step={0.05} />
+        <RiseWords text={t.label} step={0.05} />
       </Label>
       <Reveal delay={0.05} className="mt-10 max-w-[1200px] md:mt-14">
-        <ContactForm />
+        <ContactForm t={t} />
       </Reveal>
 
-      <section aria-label="Doğrudan iletişim" className="mt-28 border-t border-line pt-8 md:mt-36">
-        <Label className="text-muted">Ya da doğrudan yazın</Label>
+      <section aria-label={t.directLabel} className="mt-28 border-t border-line pt-8 md:mt-36">
+        <Label className="text-muted">{t.direct}</Label>
         <Reveal className="mt-6">
-          <ContactCards />
+          <ContactCards t={t} />
         </Reveal>
       </section>
     </Container>

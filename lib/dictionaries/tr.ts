@@ -89,6 +89,53 @@ export const tr = {
     closingB: "sizinki olsun.",
     cta: "Birlikte çalışalım!",
   },
+  about: {
+    label: "Hakkımızda",
+    /** *kelime* mavi; kaydırdıkça kelime kelime koyulaşır */
+    manifesto:
+      "Marki Labs bir teknoloji stüdyosu. Kendi ürünlerimizi yapıyoruz: *Lecmic* derste konuşulanı yazıya döküp çeviriyor, *CodeVocab* İngilizceni düzeltiyor. İşletmeler için siteler kuruyoruz; bir çekici firması da bir eğitim sistemi de kendi fontu, kendi rengiyle konuşuyor. Bir fikri alıp yayında olan bir şeye dönüştürüyoruz. *2022'den* *beri.*",
+    cta: "Konuşalım.",
+  },
+  team: {
+    label: "Ekip",
+    focus: "Alanları",
+    photoSoon: "Fotoğraf gelecek",
+  },
+  contact: {
+    label: "İletişim · boşlukları doldurun",
+    /** Cümle: p1 + ad + p2 + konu + p3 + not. p2 noktayla bitiyorsa konu büyük harfle başlar. */
+    p1: "Merhaba Marki Labs, ben ",
+    p2: ". ",
+    p3: " hakkında yazıyorum. Kısaca şöyle: ",
+    topics: ["bir web sitesi", "bir ürün fikri", "bir şablon", "başka bir şey"],
+    /** Konu seçilmezse mesajda bu yazar */
+    topicFallback: "bir proje",
+    demoNames: ["Ayşe Kaya", "Mehmet Demir", "Zeynep Yılmaz", "Can Öztürk", "Elif Şahin", "Burak Aydın", "Defne Arslan"],
+    demoNotes: [
+      "Restoranım için menüsü olan bir web sitesi istiyorum.",
+      "Bir uygulama fikrim var, nereden başlayacağımı bilmiyorum.",
+      "Markam için logo ve kurumsal kimlik arıyorum.",
+      "Mimarlık ofisimiz için Vitren gibi bir site istiyoruz.",
+      "Mevcut sitemizi baştan yenilemek istiyoruz.",
+    ],
+    nameLabel: "Adınız",
+    namePlaceholder: "adınız",
+    noteLabel: "Mesajınız",
+    notePlaceholder: "ne düşündüğünüzü yazın",
+    topicLabel: "Konu",
+    chooseTopic: "Konu seçin",
+    error: "Adınızı ve birkaç kelimeyle ne istediğinizi yazın, cümle tamamlansın.",
+    sendWhatsApp: "WhatsApp'tan gönder",
+    sendEmail: "E-posta ile gönder",
+    directLabel: "Doğrudan iletişim",
+    direct: "Ya da doğrudan yazın",
+    email: "E-posta",
+    newTab: "yeni sekmede açılır",
+    copy: "Kopyala",
+    copied: "Kopyalandı",
+    copyLabel: "E-posta adresini kopyala",
+    copiedLabel: "E-posta adresi kopyalandı",
+  },
   caseStudy: {
     next: "Sıradaki proje",
   },

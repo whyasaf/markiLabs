@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useSpring, useTransform, type MotionStyle, type MotionValue } from "framer-motion";
 import type { Member } from "@/data/team";
+import type { Dict } from "@/lib/dictionaries/tr";
 
 /**
  * Ekip sahnesi: bölüm ekrana yapışır. Her kişide önce portre küçük, isim karşısında durur; kaydırdıkça
@@ -58,7 +59,7 @@ function useMobile() {
   return mobile;
 }
 
-export default function TeamScroll({ team }: { team: Member[] }) {
+export default function TeamScroll({ team, t }: { team: Member[]; t: Dict["team"] }) {
   const ref = useRef<HTMLDivElement>(null);
   const n = team.length;
   const mobile = useMobile();
@@ -72,7 +73,7 @@ export default function TeamScroll({ team }: { team: Member[] }) {
       <div className="sticky top-0 h-screen overflow-hidden">
         <div className="relative mx-auto h-full max-w-[1400px]">
           {team.map((m, i) => (
-            <Person key={m.first} m={m} i={i} n={n} p={p} mobile={mobile} />
+            <Person key={m.first} m={m} i={i} n={n} p={p} mobile={mobile} t={t} />
           ))}
 
           {/* Alt satır: sayaç ve ilerleme */}
@@ -85,7 +86,7 @@ export default function TeamScroll({ team }: { team: Member[] }) {
                 <Bar key={m.first} i={i} n={n} p={p} />
               ))}
             </div>
-            <span className="label shrink-0 text-muted">Ekip</span>
+            <span className="label shrink-0 text-muted">{t.label}</span>
           </div>
         </div>
       </div>
@@ -93,7 +94,21 @@ export default function TeamScroll({ team }: { team: Member[] }) {
   );
 }
 
-function Person({ m, i, n, p, mobile }: { m: Member; i: number; n: number; p: MotionValue<number>; mobile: boolean }) {
+function Person({
+  m,
+  i,
+  n,
+  p,
+  mobile,
+  t,
+}: {
+  m: Member;
+  i: number;
+  n: number;
+  p: MotionValue<number>;
+  mobile: boolean;
+  t: Dict["team"];
+}) {
   const flip = i % 2 === 1;
   const dir = flip ? -1 : 1; // portrenin gittiği yön
   const f = (r: Rect) => (flip ? mirror(r) : r);
@@ -157,7 +172,7 @@ function Person({ m, i, n, p, mobile }: { m: Member; i: number; n: number; p: Mo
                 {m.first[0]}
                 {m.last[0]}
               </span>
-              <span className="label text-white/70">Fotoğraf gelecek</span>
+              <span className="label text-white/70">{t.photoSoon}</span>
             </div>
           )}
         </motion.div>
@@ -208,7 +223,7 @@ function Person({ m, i, n, p, mobile }: { m: Member; i: number; n: number; p: Mo
         )}
 
         <Masked s={s} y={fullY(4)} className="label mt-5 text-muted md:mt-[min(56px,6vh)]">
-          Alanları
+          {t.focus}
         </Masked>
         <ul className="mt-2 text-[clamp(24px,min(3.8vw,6.4vh),64px)] font-medium leading-[1.08] tracking-[-0.045em]">
           {m.focus.map((fc, j) => (

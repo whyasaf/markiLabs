@@ -2,18 +2,28 @@
 
 import { useEffect, useState } from "react";
 import { ArrowCircle } from "@/components/Arrow";
+import type { Dict } from "@/lib/dictionaries/tr";
 import { SITE } from "@/lib/site";
+
+type CardsText = Dict["contact"];
 
 /**
  * İletişim sayfasının altındaki doğrudan iletişim kartları. Kartın tamamı tıklanır (görünmez link kartı
  * kaplar); üzerine gelince ok dairesinden mavi dolgu büyüyüp kartı kaplar. E-posta kartında adresi
  * kopyalayan bir buton var: birçok bilgisayarda mailto linki hiçbir şey açmıyor.
  */
-export default function ContactCards() {
+export default function ContactCards({ t }: { t: CardsText }) {
   return (
     <div className="grid gap-3 md:grid-cols-2">
-      <Card label="E-posta" value={SITE.email} valueId="contact-email-text" href={`mailto:${SITE.email}`} action={<CopyButton text={SITE.email} />} />
-      <Card label="WhatsApp" value={SITE.whatsappLabel} href={SITE.whatsapp} external />
+      <Card
+        label={t.email}
+        value={SITE.email}
+        valueId="contact-email-text"
+        href={`mailto:${SITE.email}`}
+        action={<CopyButton text={SITE.email} t={t} />}
+        t={t}
+      />
+      <Card label="WhatsApp" value={SITE.whatsappLabel} href={SITE.whatsapp} external t={t} />
     </div>
   );
 }
@@ -25,6 +35,7 @@ function Card({
   href,
   external,
   action,
+  t,
 }: {
   label: string;
   value: string;
@@ -32,6 +43,7 @@ function Card({
   href: string;
   external?: boolean;
   action?: React.ReactNode;
+  t: CardsText;
 }) {
   return (
     <div className="group relative isolate flex min-h-[220px] flex-col justify-between gap-10 overflow-hidden rounded-[24px] bg-white p-6 transition-colors duration-500 hover:text-white has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-4 has-[a:focus-visible]:outline-blue md:min-h-[260px] md:p-8">
@@ -43,7 +55,7 @@ function Card({
       <a
         href={href}
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-        aria-label={`${label}: ${value}${external ? " (yeni sekmede açılır)" : ""}`}
+        aria-label={`${label}: ${value}${external ? ` (${t.newTab})` : ""}`}
         className="absolute inset-0 z-0 outline-none"
       />
 
@@ -74,7 +86,7 @@ function Card({
   );
 }
 
-function CopyButton({ text }: { text: string }) {
+function CopyButton({ text, t }: { text: string; t: CardsText }) {
   const [copied, setCopied] = useState(false);
   useEffect(() => {
     if (!copied) return;
@@ -103,10 +115,10 @@ function CopyButton({ text }: { text: string }) {
     <button
       type="button"
       onClick={copy}
-      aria-label={copied ? "E-posta adresi kopyalandı" : "E-posta adresini kopyala"}
+      aria-label={copied ? t.copiedLabel : t.copyLabel}
       className="relative z-10 inline-flex h-9 items-center rounded-full border border-line px-4 text-[14px] font-medium text-ink transition-colors duration-500 hover:bg-ink hover:text-white group-hover:border-white/40 group-hover:text-white"
     >
-      <span aria-live="polite">{copied ? "Kopyalandı" : "Kopyala"}</span>
+      <span aria-live="polite">{copied ? t.copied : t.copy}</span>
     </button>
   );
 }
