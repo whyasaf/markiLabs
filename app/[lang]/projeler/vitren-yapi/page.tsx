@@ -9,6 +9,7 @@ import { getDict, pageMetadata, resolveLang } from "@/lib/dictionaries";
 import { localePath } from "@/lib/i18n";
 import Rich from "@/components/case/Rich";
 import { COPY } from "./copy";
+import { workVideo } from "@/data/work";
 
 // Vitren'in kimliği: Manrope + Cormorant Garamond, krem #f4f3ef, kırmızı #d4121d, dikey kırmızı çizgi, ince ızgara.
 const manrope = Manrope({ subsets: ["latin", "latin-ext"], weight: ["500", "700", "800"], variable: "--v-sans" });
@@ -156,7 +157,7 @@ export default async function VitrenPage({ params }: { params: Promise<{ lang: s
       <section className="mx-auto max-w-[1240px] px-6 py-28 md:px-10 md:py-36">
         <Reveal>
           <div className="aspect-[16/10] overflow-hidden">
-            <LazyVideo src="/videos/work-vitrenyapi.mp4" poster="/videos/work-vitrenyapi.jpg" className="h-full w-full object-cover" />
+            <LazyVideo src={workVideo("vitren-yapi", lang).src} poster={workVideo("vitren-yapi", lang).poster} className="h-full w-full object-cover" />
           </div>
         </Reveal>
         <div className="mt-20 grid gap-12 md:grid-cols-[1fr_1.4fr]">

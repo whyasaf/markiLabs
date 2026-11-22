@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&family=Playfair+Display:ital,wght@1,500&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<style>
+  :root { --bg: #ffffff; --fg: #1f2937; --a: #16a34a; }
+  body { font-family: Inter, sans-serif; }
+  .serif { font-family: "Playfair Display", serif; font-style: italic; font-weight: 500; }
+
+  /* Sahne 1: kelimeler sırayla yer değiştirir */
+  #s1 .stack { position: relative; height: 230px; width: 1400px; }
+  #s1 .w { position: absolute; inset: 0; font-size: 210px; font-weight: 800; letter-spacing: -0.05em; line-height: 1; text-align: center;
+    opacity: 0; animation: swap .75s var(--ease) var(--d) both; }
+  #s1 .w.g { color: var(--a); }
+  @keyframes swap { 0% { opacity: 0; transform: translateY(80px); } 25%, 75% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-80px); } }
+  #s1 .last { font-size: 150px; top: 30px; animation: rise2 .8s var(--ease) var(--d) both; }
+  @keyframes rise2 { from { opacity: 0; transform: translateY(80px); } to { opacity: 1; transform: none; } }
+
+  /* Sahne 2: perspektif yol */
+  #s2 { background: #0f172a; color: #fff; overflow: hidden; }
+  .road { position: absolute; left: 50%; bottom: -60px; width: 1500px; height: 1500px; margin-left: -750px;
+    transform: perspective(1100px) rotateX(64deg); transform-origin: bottom; background: #1e293b;
+    -webkit-mask-image: linear-gradient(to top, #000 55%, transparent 100%); mask-image: linear-gradient(to top, #000 55%, transparent 100%); }
+  .road::before, .road::after { content: ""; position: absolute; top: 0; bottom: 0; width: 14px; background: #e2e8f0; }
+  .road::before { left: 18%; } .road::after { right: 18%; }
+  .lane { position: absolute; left: 50%; top: 0; bottom: 0; width: 18px; margin-left: -9px;
+    background: repeating-linear-gradient(to bottom, var(--a) 0 70px, transparent 70px 150px);
+    animation: lane 1s linear var(--d) infinite; }
+  @keyframes lane { from { background-position-y: 0; } to { background-position-y: 150px; } }
+  #s2 .copy { position: absolute; top: 110px; left: 0; right: 0; text-align: center; text-shadow: 0 6px 30px #0f172a; }
+  #s2 h2 { font-size: 112px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; }
+  #s2 h2 .serif { color: #4ade80; font-size: 120px; }
+  #s2 p { margin-top: 34px; font-size: 32px; color: #cbd5e1; }
+
+  #s3 img { width: 860px; }
+  #s3 .pill { margin-top: 50px; display: inline-flex; gap: 14px; align-items: center; padding: 16px 30px; border-radius: 99px; background: #f0fdf4; color: var(--a); font-weight: 700; font-size: 24px; letter-spacing: .08em; }
+  #s3 .pill i { width: 14px; height: 14px; border-radius: 50%; background: var(--a); animation: pulse 1.2s ease-in-out var(--d) infinite; }
+  #s3 .site { margin-top: 22px; font-size: 34px; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<section class="scene center" id="s1" style="--s:0s; --e:4.0s">
+  <div class="stack">
+    <div class="w" style="--d:.1s">Rotalar.</div>
+    <div class="w g" style="--d:.75s">Yollar.</div>
+    <div class="w" style="--d:1.4s">Molalar.</div>
+    <div class="w g" style="--d:2.05s">Yakıt.</div>
+    <div class="w last" style="--d:2.75s">ve daha <span class="serif" style="color:var(--a)">fazlası.</span></div>
+  </div>
+</section>
+
+<section class="scene" id="s2" style="--s:4.0s; --e:8.2s">
+  <div class="road fade" style="--d:4.0s"><div class="lane" style="--d:4.0s"></div></div>
+  <div class="copy">
+    <h2><span class="line"><span style="--d:4.3s">Yolculuğunuzun</span></span><span class="line"><span style="--d:4.45s"><span class="serif">yeni adresi.</span></span></span></h2>
+    <p class="pop" style="--d:5.1s">Türkiye'nin Ulaşım Asistanı</p>
+  </div>
+</section>
+
+<section class="scene center" id="s3" style="--s:8.2s; --e:99s">
+  <div>
+    <img class="pop" src="assets/logo_t.png" alt="" style="--d:8.3s">
+    <div><span class="pill pop" style="--d:8.8s"><i></i>GELİŞTİRİLİYOR</span></div>
+    <div class="site pop" style="--d:9.0s">plusotoyol.com</div>
+  </div>
+</section>
+
+</body>
+</html>

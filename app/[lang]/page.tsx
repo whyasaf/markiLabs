@@ -89,7 +89,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 title={w.name}
                 tags={w.tags[lang]}
                 status={w.status?.[lang]}
-                video={w.video}
+                video={w.video[lang]}
                 external={!w.slug}
               />
             ))}

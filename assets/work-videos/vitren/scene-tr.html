@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Cormorant+Garamond:ital,wght@1,600&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<style>
+  :root { --bg: #f4f3ef; --fg: #111111; --a: #d4121d; }
+  body { font-family: Manrope, sans-serif; }
+  .red { color: var(--a); }
+  .label { font-weight: 700; font-size: 18px; letter-spacing: .2em; color: var(--a); }
+  #s1 { display: flex; align-items: center; padding: 0 150px; gap: 50px; }
+  #s1 h1 { font-size: 150px; font-weight: 800; letter-spacing: -0.045em; line-height: .98; }
+  #s2 .reveal { position: absolute; inset: 50px; --r: 26px; }
+  #s2 .tag { position: absolute; left: 110px; bottom: 110px; background: #fff; padding: 30px 38px; border-radius: 4px; box-shadow: 0 30px 60px -20px rgba(0,0,0,.35); }
+  #s2 .tag b { display: block; font-size: 38px; font-weight: 800; margin-top: 10px; }
+  #s2 .tag span { display: block; font-size: 18px; color: #777; letter-spacing: .12em; margin-top: 6px; }
+  #s3 { padding: 110px 120px 0; }
+  #s3 h2 { font-size: 92px; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 50px; }
+  #s3 .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .proj .reveal { height: 520px; --r: 6px; }
+  .proj b { display: block; font-size: 30px; font-weight: 800; margin-top: 20px; letter-spacing: -0.01em; }
+  #s4 { display: grid; place-items: center; }
+  #s5 { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 90px; padding: 0 140px; }
+  #s5 h2 { font-size: 92px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.02; }
+  #s5 em { font-family: "Cormorant Garamond", serif; font-weight: 600; color: var(--a); font-size: 1.12em; letter-spacing: -0.01em; }
+  #s5 .reveal { height: 720px; --r: 6px; }
+  #s6 img { width: 620px; }
+  #s6 .note { margin-top: 40px; font-size: 22px; letter-spacing: .2em; color: #777; font-weight: 700; }
+  #s6 .site { margin-top: 26px; display: inline-block; background: var(--a); color: #fff; padding: 18px 40px; font-weight: 800; font-size: 30px; letter-spacing: .02em; }
+</style>
+</head>
+<body>
+
+<section class="scene" id="s1" style="--s:0s; --e:3.2s">
+  <div class="vbar" style="--d:.1s; --h:440px"></div>
+  <h1>
+    <span class="line"><span style="--d:.3s">Geleceğin</span></span>
+    <span class="line"><span style="--d:.45s">Mimarisinde</span></span>
+    <span class="line"><span class="red" style="--d:.6s">Yaşam Sanatı.</span></span>
+  </h1>
+</section>
+
+<section class="scene" id="s2" style="--s:3.2s; --e:6.4s">
+  <div class="reveal" style="--d:3.25s"><img src="assets/hero.jpg" alt="" style="--d:3.25s"></div>
+  <div class="tag pop" style="--d:4.1s"><div class="label">ÖNE ÇIKAN PROJE</div><b>VİTREN RESERVE</b><span>BEYKOZ · İSTANBUL</span></div>
+</section>
+
+<section class="scene" id="s3" style="--s:6.4s; --e:9.8s">
+  <div class="label fade" style="--d:6.5s">— PORTFOLYO</div>
+  <h2><span class="line"><span style="--d:6.55s">Seçkin Projeler</span></span></h2>
+  <div class="row">
+    <div class="proj"><div class="reveal" style="--d:6.9s"><img src="assets/reserve-hero.jpg" alt="" style="--d:6.9s"></div><b class="fade" style="--d:7.4s">VİTREN Reserve</b></div>
+    <div class="proj"><div class="reveal" style="--d:7.1s"><img src="assets/tower-hero.jpg" alt="" style="--d:7.1s"></div><b class="fade" style="--d:7.6s">VİTREN Tower</b></div>
+    <div class="proj"><div class="reveal" style="--d:7.3s"><img src="assets/horizon-hero.jpg" alt="" style="--d:7.3s"></div><b class="fade" style="--d:7.8s">VİTREN Horizon</b></div>
+  </div>
+</section>
+
+<section class="scene" id="s4" style="--s:9.8s; --e:12.8s">
+  <div class="browser" style="--d:9.85s">
+    <div class="chrome"><i></i><i></i><i></i><span class="url">vitrenyapi.whyasaf.com</span></div>
+    <div class="shot"><img src="assets/site.jpg" alt="" style="--d:10.4s"></div>
+  </div>
+</section>
+
+<section class="scene" id="s5" style="--s:12.8s; --e:15.6s">
+  <h2>
+    <span class="line"><span style="--d:12.9s">Form, İşlev ve</span></span>
+    <span class="line"><span style="--d:13.05s">Estetiğin</span></span>
+    <span class="line"><span style="--d:13.2s"><em>Kusursuz Dengesi</em></span></span>
+  </h2>
+  <div class="reveal" style="--d:13.0s"><img src="assets/about.jpg" alt="" style="--d:13.0s"></div>
+</section>
+
+<section class="scene center" id="s6" style="--s:15.6s; --e:99s">
+  <div>
+    <img class="pop" src="assets/logo_t.png" alt="" style="--d:15.7s">
+    <div class="note fade" style="--d:16.0s">MİMARLIK FİRMALARI İÇİN WEB SİTESİ ŞABLONU</div>
+    <div class="site pop" style="--d:16.2s">vitrenyapi.whyasaf.com</div>
+  </div>
+</section>
+
+</body>
+</html>

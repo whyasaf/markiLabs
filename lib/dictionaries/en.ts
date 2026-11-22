@@ -127,11 +127,17 @@ export const en: Dict = {
     copyLabel: "Copy email address",
     copiedLabel: "Email address copied",
   },
+  /** Paylaşım önizleme görselleri */
+  og: {
+    studio: "Technology studio",
+    project: "Project",
+  },
   caseStudy: {
     next: "Next project",
   },
   legal: {
     updated: "Last updated",
+    date: "13 November 2026",
   },
   notFound: {
     title: "This page doesn't exist yet.",

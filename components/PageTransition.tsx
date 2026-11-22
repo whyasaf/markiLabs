@@ -6,6 +6,16 @@ import { animate, motion, useMotionValue, useReducedMotion, useTransform } from 
 
 const EASE = [0.76, 0, 0.24, 1] as const;
 
+type Origin = { x: number; y: number; max: number };
+
+/**
+ * Yolda olan geçiş: tıklama anında yazılır, delik açılmaya başlayınca silinir. Bileşenin dışında tutulur, çünkü
+ * dil değişince (TR ↔ EN) en dış layout ([lang]) baştan kurulur ve bu bileşen de sıfırlanır; yeni kurulan
+ * bileşen bekleyen geçişi buradan görüp mavi ekranla başlar ve deliği aynı noktadan açar.
+ */
+let pending: (Origin & { at: number }) | null = null;
+const takePending = () => (pending && Date.now() - pending.at < 6000 ? pending : null);
+
 /**
  * Sayfa geçişi: site içi bir linke tıklayınca tıklanan noktadan mavi bir daire büyüyüp ekranı kaplar,
  * ardından yeni sayfaya geçilir; mavinin içinde aynı noktadan bir delik açılır ve yeni sayfa oradan görünür.
@@ -20,9 +30,10 @@ export default function PageTransition() {
   const pathname = usePathname();
   const reduce = useReducedMotion();
 
-  const [phase, setPhase] = useState<"idle" | "cover" | "reveal">("idle");
+  // Sunucuda ve ilk yüklemede pending hep boş: başlangıç "idle", hydration uyuşur
+  const [phase, setPhase] = useState<"idle" | "cover" | "reveal">(() => (takePending() ? "reveal" : "idle"));
   const [lastPath, setLastPath] = useState(pathname);
-  const origin = useRef({ x: 0, y: 0, max: 0 });
+  const origin = useRef<Origin>(takePending() ?? { x: 0, y: 0, max: 0 });
   const cover = useMotionValue(0); // büyüyen mavi dairenin yarıçapı (px)
   const hole = useMotionValue(0); // mavinin içinde açılan deliğin yarıçapı (px)
 
@@ -64,6 +75,7 @@ export default function PageTransition() {
       const x = e.detail === 0 ? box.left + box.width / 2 : e.clientX;
       const y = e.detail === 0 ? box.top + box.height / 2 : e.clientY;
       origin.current = { x, y, max: Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 2 };
+      pending = { ...origin.current, at: Date.now() };
 
       hole.set(0);
       cover.set(0);
@@ -87,6 +99,7 @@ export default function PageTransition() {
 
   useLayoutEffect(() => {
     if (phase !== "reveal") return;
+    pending = null;
     // Sayfa açılış yazıları (.rise) delik açılırken başlasın
     document.documentElement.style.setProperty("--page-delay", "0.3s");
     const c = animate(hole, origin.current.max, { duration: 0.7, ease: EASE, onComplete: () => setPhase("idle") });

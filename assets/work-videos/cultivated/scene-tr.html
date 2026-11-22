@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@500;600&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<style>
+  :root { --bg: #142640; --fg: #fdfbf7; --a: #c9a646; }
+  body { font-family: Inter, sans-serif; }
+  .pf { font-family: "Playfair Display", serif; font-weight: 500; letter-spacing: -0.01em; }
+  .gold { color: var(--a); }
+  .eyebrow { font: 600 20px/1 Inter, sans-serif; letter-spacing: .22em; color: var(--a); display: flex; align-items: center; gap: 22px; }
+  .eyebrow::after { content: ""; width: 0; height: 2px; background: var(--a); animation: grow2 1s var(--ease) var(--d) both; }
+  @keyframes grow2 { to { width: 90px; } }
+
+  #s1 h1 { font-size: 118px; line-height: 1.08; margin-top: 40px; }
+  #s2 { display: grid; place-items: center; background: #0e1c31; }
+  .seal { position: absolute; right: 120px; bottom: 90px; width: 220px; }
+  #s3 h2 { font-size: 96px; text-align: center; margin-bottom: 70px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; padding: 0 130px; }
+  .card { border: 1.5px solid rgba(201,166,70,.45); border-radius: 6px; padding: 44px 40px; min-height: 300px; background: rgba(255,255,255,.03); }
+  .card .n { font-size: 64px; color: var(--a); }
+  .card h3 { font-size: 40px; margin-top: 26px; }
+  .card p { margin-top: 14px; font-size: 21px; line-height: 1.45; color: #b8c2d3; }
+  #s4 { display: grid; grid-template-columns: 520px 1fr; gap: 110px; align-items: center; padding: 0 150px; }
+  #s4 img { width: 520px; }
+  #s4 h2 { font-size: 92px; margin-bottom: 40px; }
+  #s4 li { list-style: none; font-size: 44px; padding: 20px 0; border-top: 1px solid rgba(201,166,70,.35); display: flex; gap: 24px; align-items: baseline; }
+  #s4 li span { font: 600 18px Inter; letter-spacing: .18em; color: var(--a); }
+  #s4 ul { padding: 0; }
+  #s5 .tree { width: 280px; }
+  #s5 h2 { font-size: 104px; line-height: 1.02; margin-top: 30px; }
+  #s5 .site { margin-top: 44px; display: inline-block; padding: 18px 40px; background: var(--a); color: #142640; font: 600 30px Inter; letter-spacing: .02em; }
+</style>
+</head>
+<body>
+
+<section class="scene vcenter" id="s1" style="--s:0s; --e:3.4s">
+  <div class="eyebrow fade" style="--d:.2s">ADVANCED LINGUISTIC ARCHITECTURE</div>
+  <h1 class="pf">
+    <span class="line"><span style="--d:.5s">This is not only a course.</span></span>
+    <span class="line"><span class="gold" style="--d:1.3s"><em>It is a system.</em></span></span>
+  </h1>
+</section>
+
+<section class="scene" id="s2" style="--s:3.4s; --e:6.8s">
+  <div class="browser" style="--d:3.45s">
+    <div class="chrome"><i></i><i></i><i></i><span class="url">cultivatedvoicesystem.com</span></div>
+    <div class="shot"><img src="assets/site.jpg" alt="" style="--d:4s"></div>
+  </div>
+  <img class="seal spinIn" src="assets/cvs_arch_1.png" alt="" style="--d:4.6s">
+</section>
+
+<section class="scene vcenter" id="s3" style="--s:6.8s; --e:10.2s; padding:0">
+  <h2 class="pf"><span class="line"><span style="--d:6.9s">Core <em class="gold">Methodology</em></span></span></h2>
+  <div class="cards">
+    <div class="card up" style="--d:7.3s"><div class="n pf">I</div><h3 class="pf">A-R-E-R Protocol</h3><p>Awareness, Release, Engagement, Response.</p></div>
+    <div class="card up" style="--d:7.5s"><div class="n pf">II</div><h3 class="pf">P-E-E-E Framework</h3><p>Posture, Emotion, Expression, Endurance.</p></div>
+    <div class="card up" style="--d:7.7s"><div class="n pf">III</div><h3 class="pf">Control Loop</h3><p>Listening and feeling your own voice.</p></div>
+  </div>
+</section>
+
+<section class="scene" id="s4" style="--s:10.2s; --e:13.4s">
+  <img class="spinIn" src="assets/emblem.png" alt="" style="--d:10.3s">
+  <div>
+    <h2 class="pf"><span class="line"><span style="--d:10.4s">Applications</span></span></h2>
+    <ul>
+      <li class="slideL pf" style="--d:10.8s"><span>01</span>IELTS / Exam Preparation</li>
+      <li class="slideL pf" style="--d:11.0s"><span>02</span>Business English</li>
+      <li class="slideL pf" style="--d:11.2s"><span>03</span>General English</li>
+    </ul>
+  </div>
+</section>
+
+<section class="scene center" id="s5" style="--s:13.4s; --e:99s">
+  <div>
+    <img class="tree pop" src="assets/emblem.png" alt="" style="--d:13.5s">
+    <h2 class="pf"><span class="line"><span style="--d:13.7s">The Cultivated</span></span><span class="line"><span class="gold" style="--d:13.85s"><em>Voice System</em></span></span></h2>
+    <div class="site pop" style="--d:14.3s">cultivatedvoicesystem.com</div>
+  </div>
+</section>
+
+</body>
+</html>

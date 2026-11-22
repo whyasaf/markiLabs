@@ -7,6 +7,7 @@ import NextCase from "@/components/case/NextCase";
 import LazyVideo from "@/components/LazyVideo";
 import Rich from "@/components/case/Rich";
 import { COPY } from "./copy";
+import { workVideo } from "@/data/work";
 import { getDict, pageMetadata, resolveLang } from "@/lib/dictionaries";
 
 // whyasaf.com'un kimliği: Playfair başlık + Inter italik metin + Caveat el yazısı, siyah #09090b, camgöbeği vurgu.
@@ -77,7 +78,7 @@ export default async function WhyasafPage({ params }: { params: Promise<{ lang: 
         <Reveal>
           <div className="mx-auto max-w-[1300px] overflow-hidden rounded-[28px] border border-[#27272a] bg-black p-3">
             <div className="aspect-[16/10] overflow-hidden rounded-[18px]">
-              <LazyVideo src="/videos/work-whyasaf.mp4" poster="/videos/work-whyasaf.jpg" className="h-full w-full object-cover" />
+              <LazyVideo src={workVideo("whyasaf", lang).src} poster={workVideo("whyasaf", lang).poster} className="h-full w-full object-cover" />
             </div>
           </div>
         </Reveal>

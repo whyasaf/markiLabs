@@ -17,13 +17,13 @@ type Card = {
   href: string;
   title: string;
   tags: Record<Locale, string[]>;
-  video: { src: string; poster: string };
+  video: Record<Locale, { src: string; poster: string }>;
   status?: Record<Locale, string>;
 };
 
 const fromProject = (slug: string): Card => {
   const p = PROJECTS.find((x) => x.slug === slug)!;
-  return { href: `/projeler/${p.slug}`, title: p.name, tags: p.tags, video: { src: p.media.loop, poster: p.media.poster } };
+  return { href: `/projeler/${p.slug}`, title: p.name, tags: p.tags, video: { tr: { src: p.media.loop, poster: p.media.poster }, en: { src: p.media.loop, poster: p.media.poster } } };
 };
 const fromWork = (slug: string): Card => {
   const w = WORK.find((x) => x.slug === slug)!;
@@ -71,7 +71,7 @@ export default async function HizmetlerPage({ params }: { params: Promise<{ lang
                   href={localePath(lang, c.href)}
                   title={c.title}
                   tags={c.tags[lang]}
-                  video={c.video}
+                  video={c.video[lang]}
                   status={c.status?.[lang]}
                 />
               ))}

@@ -31,7 +31,7 @@ const tr = {
 
 const en: typeof tr = {
   kicker: "— Website template",
-  h1: ["The art of living", "in the architecture", "of tomorrow."],
+  h1: ["The art of living", "in tomorrow’s", "architecture."],
   intro:
     "A website template for architecture and construction firms, with a project showcase and an enquiry flow. The live demo is online.",
   demo: "View the demo ↗",

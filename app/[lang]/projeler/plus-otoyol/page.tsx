@@ -7,6 +7,7 @@ import NextCase from "@/components/case/NextCase";
 import LazyVideo from "@/components/LazyVideo";
 import Rich from "@/components/case/Rich";
 import { COPY } from "./copy";
+import { workVideo } from "@/data/work";
 import { getDict, pageMetadata, resolveLang } from "@/lib/dictionaries";
 
 // Plus Otoyol'un kimliği: Inter + italik serif alt yazı, yeşil #16a34a, gece mavisi yol.
@@ -113,7 +114,7 @@ export default async function PlusPage({ params }: { params: Promise<{ lang: str
         <div className="mx-auto max-w-[1200px]">
           <Reveal>
             <div className="aspect-[16/10] overflow-hidden rounded-[20px] shadow-[0_40px_80px_-40px_rgba(15,23,42,.45)]">
-              <LazyVideo src="/videos/work-plusotoyol.mp4" poster="/videos/work-plusotoyol.jpg" className="h-full w-full object-cover" />
+              <LazyVideo src={workVideo("plus-otoyol", lang).src} poster={workVideo("plus-otoyol", lang).poster} className="h-full w-full object-cover" />
             </div>
           </Reveal>
           <Reveal delay={0.1}>

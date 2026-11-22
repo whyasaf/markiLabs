@@ -136,11 +136,17 @@ export const tr = {
     copyLabel: "E-posta adresini kopyala",
     copiedLabel: "E-posta adresi kopyalandı",
   },
+  /** Paylaşım önizleme görselleri */
+  og: {
+    studio: "Teknoloji stüdyosu",
+    project: "Proje",
+  },
   caseStudy: {
     next: "Sıradaki proje",
   },
   legal: {
     updated: "Son güncelleme",
+    date: "13 Kasım 2026",
   },
   notFound: {
     title: "Bu sayfa henüz yok.",

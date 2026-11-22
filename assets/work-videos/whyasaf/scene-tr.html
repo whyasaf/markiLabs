@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@500&family=Caveat:wght@600&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<style>
+  :root { --bg: #09090b; --fg: #f4f4f5; --a: #22d3ee; }
+  body { font-family: Inter, sans-serif; }
+  .pf { font-family: "Playfair Display", serif; font-weight: 500; letter-spacing: -0.02em; }
+  .hand { font-family: Caveat, cursive; color: var(--a); }
+  #s1 .hand { font-size: 84px; transform: rotate(-4deg); display: inline-block; align-self: flex-start; }
+  #s1 h1 { font-size: 200px; line-height: 1; margin-top: 46px; }
+  #s2 p { font-size: 70px; line-height: 1.12; font-weight: 500; letter-spacing: -0.03em; }
+  #s2 p em { color: #a1a1aa; font-weight: 400; }
+  #s2 .sep { color: var(--a); font-family: "JetBrains Mono", monospace; }
+  #s3 { display: grid; place-items: center; }
+  #s3 .browser { background: #111; }
+  #s3 .chrome { background: #18181b; border-color: #27272a; }
+  #s3 .chrome i { background: #3f3f46; }
+  #s3 .url { background: #27272a; color: #d4d4d8; }
+  #s4 h2 { font-size: 92px; margin-bottom: 56px; }
+  #s4 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .pcard { background: #131316; border: 1px solid #27272a; border-radius: 24px; padding: 18px; }
+  .pcard .img { height: 330px; border-radius: 14px; overflow: hidden; background: #fff; display: grid; place-items: center; }
+  .pcard .img img { width: 100%; height: 100%; object-fit: cover; }
+  .pcard .img img.contain { object-fit: contain; width: 70%; }
+  .pcard .meta { display: flex; justify-content: space-between; align-items: baseline; padding: 22px 10px 8px; }
+  .pcard b { font: 500 40px "Playfair Display", serif; }
+  .pcard span { font-size: 20px; color: #a1a1aa; }
+  #s5 .avatar { width: 230px; height: 230px; border-radius: 50%; object-fit: cover; border: 4px solid #27272a; }
+  #s5 .logo { width: 420px; filter: invert(1); margin-top: 46px; }
+  #s5 .hand { font-size: 64px; margin-top: 22px; }
+</style>
+</head>
+<body>
+
+<section class="scene vcenter" id="s1" style="--s:0s; --e:3.0s">
+  <div class="hand fade" style="--d:.2s">Merhaba, ben</div>
+  <h1 class="pf">
+    <span class="line"><span style="--d:.55s">Ömer Asaf<span class="dot" style="--d:1.4s"></span></span></span>
+  </h1>
+</section>
+
+<section class="scene vcenter" id="s2" style="--s:3.0s; --e:6.4s">
+  <p>
+    <span class="line"><span style="--d:3.1s">Yazılım Geliştirici &amp; Tasarımcı</span></span>
+    <span class="line"><span style="--d:3.6s"><span class="sep">// </span><em>Kodu tasarım estetiğiyle</em></span></span>
+    <span class="line"><span style="--d:3.75s"><em>birleştiriyorum.</em></span></span>
+    <span class="line"><span style="--d:4.4s"><span class="sep">// </span><em>Yapay zekâyı keşfedip</em></span></span>
+    <span class="line"><span style="--d:4.55s"><em>dijital ürünler geliştiriyorum.</em></span></span>
+  </p>
+</section>
+
+<section class="scene" id="s3" style="--s:6.4s; --e:9.8s">
+  <div class="browser" style="--d:6.45s">
+    <div class="chrome"><i></i><i></i><i></i><span class="url">whyasaf.com</span></div>
+    <div class="shot"><img src="assets/site.jpg" alt="" style="--d:7s"></div>
+  </div>
+</section>
+
+<section class="scene vcenter" id="s4" style="--s:9.8s; --e:13.2s">
+  <h2 class="pf"><span class="line"><span style="--d:9.9s">Projeler<span class="dot" style="--d:10.6s"></span></span></span></h2>
+  <div class="grid">
+    <div class="pcard up" style="--d:10.2s"><div class="img"><img src="assets/lecmic.jpg" alt=""></div><div class="meta"><b>Lecmic</b><span>2026 — Günümüz</span></div></div>
+    <div class="pcard up" style="--d:10.4s"><div class="img"><img class="contain" src="assets/marki_logo.jpg" alt=""></div><div class="meta"><b>Marki Labs.</b><span>2022 — Günümüz</span></div></div>
+  </div>
+</section>
+
+<section class="scene center" id="s5" style="--s:13.2s; --e:99s">
+  <div>
+    <img class="avatar pop" src="assets/cv_1_avatar.jpg" alt="" style="--d:13.3s">
+    <div><img class="logo pop" src="assets/logo.png" alt="" style="--d:13.6s"></div>
+    <div class="hand fade" style="--d:14.0s">whyasaf.com</div>
+  </div>
+</section>
+
+</body>
+</html>

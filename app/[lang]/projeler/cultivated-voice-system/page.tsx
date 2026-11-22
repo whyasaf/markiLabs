@@ -6,6 +6,7 @@ import Browser from "@/components/case/Browser";
 import NextCase from "@/components/case/NextCase";
 import LazyVideo from "@/components/LazyVideo";
 import { COPY } from "./copy";
+import { workVideo } from "@/data/work";
 import { getDict, pageMetadata, resolveLang } from "@/lib/dictionaries";
 
 // Cultivated'ın kimliği: Playfair Display + Inter, lacivert #142640, altın #c9a646, ince altın çizgiler.
@@ -93,7 +94,7 @@ export default async function CultivatedPage({ params }: { params: Promise<{ lan
           <div className="mx-auto max-w-[1300px] border p-2" style={{ borderColor: "rgba(201,166,70,.45)" }}>
             <div className="aspect-[16/10] overflow-hidden">
               <LazyVideo
-                src="/videos/work-cultivatedvoicesystem.mp4"
+                src={workVideo("cultivated-voice-system", lang).src}
                 poster="/videos/work-cultivatedvoicesystem-alt.jpg"
                 className="h-full w-full object-cover"
               />

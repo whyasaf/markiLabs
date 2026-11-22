@@ -1,9 +1,11 @@
-import { caseOg } from "@/lib/og";
+import { caseOg, ogLang } from "@/lib/og";
+import { LOCALES } from "@/lib/i18n";
 
-export const alt = "Lecmic, Marki Labs";
+export const alt = "Lecmic — Marki Labs";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+export const generateStaticParams = () => LOCALES.map((lang) => ({ lang }));
 
-export default function Image() {
-  return caseOg("lecmic");
+export default async function Image({ params }: { params: Promise<{ lang: string }> }) {
+  return caseOg("lecmic", await ogLang(params));
 }

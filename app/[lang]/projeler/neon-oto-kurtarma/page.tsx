@@ -6,6 +6,7 @@ import Reveal from "@/components/Reveal";
 import NextCase from "@/components/case/NextCase";
 import Rich from "@/components/case/Rich";
 import { COPY } from "./copy";
+import { workVideo } from "@/data/work";
 import { getDict, pageMetadata, resolveLang } from "@/lib/dictionaries";
 
 // Neon'un kendi kimliği: Plus Jakarta Sans + italik Playfair, yeşil #00bf63, beyaz zemin, keskin köşeler.
@@ -106,8 +107,8 @@ export default async function NeonPage({ params }: { params: Promise<{ lang: str
         <Reveal>
           <div className="relative aspect-[16/10] overflow-hidden bg-[#f2f4f3]">
             <LazyVideo
-              src="/videos/work-neonotokurtarma.mp4"
-              poster="/videos/work-neonotokurtarma.jpg"
+              src={workVideo("neon-oto-kurtarma", lang).src}
+              poster={workVideo("neon-oto-kurtarma", lang).poster}
               className="h-full w-full object-cover"
             />
           </div>

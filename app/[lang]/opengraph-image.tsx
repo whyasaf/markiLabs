@@ -1,9 +1,11 @@
-import { homeOg } from "@/lib/og";
+import { homeOg, ogLang } from "@/lib/og";
+import { LOCALES } from "@/lib/i18n";
 
-export const alt = "Marki Labs: fikirleri çalışan ürünlere dönüştürüyoruz.";
+export const alt = "Marki Labs";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+export const generateStaticParams = () => LOCALES.map((lang) => ({ lang }));
 
-export default function Image() {
-  return homeOg();
+export default async function Image({ params }: { params: Promise<{ lang: string }> }) {
+  return homeOg(await ogLang(params));
 }

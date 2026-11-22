@@ -1,20 +1,28 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { CASES } from "@/data/cases";
+import { getDict } from "@/lib/dictionaries";
+import { isLocale, localePath, type Locale } from "@/lib/i18n";
 
 /** Paylaşım önizlemesi (WhatsApp, LinkedIn, X...): 1200×630, sitenin fontu ve logosuyla. */
 export const OG_SIZE = { width: 1200, height: 630 };
 
-const root = process.cwd();
-const asset = (p: string) => readFile(join(root, p));
+// Dosyalar bu modülün konumuna göre okunur (new URL + import.meta.url): derleyici yalnızca bu dosyaları pakete
+// ekler; process.cwd() ile okununca bütün proje izleniyordu.
+const FONT_LATIN = new URL("../assets/fonts/inter-tight-latin-500.woff", import.meta.url);
+const FONT_EXT = new URL("../assets/fonts/inter-tight-latin-ext-500.woff", import.meta.url);
+const LOGO = new URL("../public/logo.png", import.meta.url);
+const LOGO_WHITE = new URL("../public/logo-white.png", import.meta.url);
+
+/** Önizleme görselinin dil parametresi (geçersizse Türkçe) */
+export async function ogLang(params: Promise<{ lang: string }>): Promise<Locale> {
+  const { lang } = await params;
+  return isLocale(lang) ? lang : "tr";
+}
 
 async function fonts() {
   // Latin ve Latin-ext (ş, ğ, İ...) ayrı dosyalarda; aynı adla verilince eksik harf diğerinden alınır
-  const [latin, ext] = await Promise.all([
-    asset("assets/fonts/inter-tight-latin-500.woff"),
-    asset("assets/fonts/inter-tight-latin-ext-500.woff"),
-  ]);
+  const [latin, ext] = await Promise.all([readFile(FONT_LATIN), readFile(FONT_EXT)]);
   return [
     { name: "Inter Tight", data: latin, weight: 500 as const, style: "normal" as const },
     { name: "Inter Tight", data: ext, weight: 500 as const, style: "normal" as const },
@@ -22,7 +30,7 @@ async function fonts() {
 }
 
 async function logo(white: boolean) {
-  const png = await asset(white ? "public/logo-white.png" : "public/logo.png");
+  const png = await readFile(white ? LOGO_WHITE : LOGO);
   return `data:image/png;base64,${png.toString("base64")}`;
 }
 
@@ -33,7 +41,8 @@ const isDark = (hex: string) => {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b < 128;
 };
 
-export async function homeOg() {
+export async function homeOg(lang: Locale) {
+  const t = getDict(lang);
   return new ImageResponse(
     (
       <div
@@ -52,12 +61,12 @@ export async function homeOg() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={await logo(false)} width={255} height={40} alt="" />
         <div style={{ display: "flex", flexDirection: "column", fontSize: 96, lineHeight: 1, letterSpacing: -4.5 }}>
-          <span>Fikirleri çalışan</span>
-          <span style={{ color: "#1f45ff" }}>ürünlere dönüştürüyoruz.</span>
+          <span>{t.hero.top}</span>
+          <span style={{ color: "#1f45ff" }}>{t.hero.bottom}</span>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 28, color: "#6b6f7d" }}>
-          <span>Teknoloji stüdyosu</span>
-          <span>markilabs.com</span>
+          <span>{t.og.studio}</span>
+          <span>markilabs.com{lang === "en" ? "/en" : ""}</span>
         </div>
       </div>
     ),
@@ -66,7 +75,7 @@ export async function homeOg() {
 }
 
 /** Proje sayfası önizlemesi: projenin kendi renkleri, adı ve Marki Labs logosu */
-export async function caseOg(slug: string) {
+export async function caseOg(slug: string, lang: Locale) {
   const c = CASES.find((x) => x.slug === slug)!;
   const dark = isDark(c.bg);
   return new ImageResponse(
@@ -96,8 +105,8 @@ export async function caseOg(slug: string) {
           ))}
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 26, opacity: 0.6 }}>
-          <span>Proje</span>
-          <span>markilabs.com/projeler/{c.slug}</span>
+          <span>{getDict(lang).og.project}</span>
+          <span>markilabs.com{localePath(lang, `/projeler/${c.slug}`)}</span>
         </div>
       </div>
     ),
