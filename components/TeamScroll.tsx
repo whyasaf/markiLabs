@@ -140,7 +140,8 @@ function Person({
   // (yansımasız geometride hesaplanır; aynalı kişide yön ters çevrilir).
   const introIn = (v: number, j: number) => (i === 0 ? 1 : out(clamp01((v + 0.07 - j * 0.02) / 0.07)));
   const pushed = (v: number, j: number) => {
-    const edge = D_SMALL[0] + D_SMALL[2] + (D_BIG[0] + D_BIG[2] - D_SMALL[0] - D_SMALL[2]) * inOut(travel(v - j * 0.025));
+    // Alt satırlar biraz önden gider (geriden gelse portrenin altında kalırdı)
+    const edge = D_SMALL[0] + D_SMALL[2] + (D_BIG[0] + D_BIG[2] - D_SMALL[0] - D_SMALL[2]) * inOut(travel(v + j * 0.008));
     return (Math.max(0, edge + 2 - D_INTRO_TEXT[0]) / D_INTRO_TEXT[2]) * 100 * 1.25;
   };
   const introY = (j: number) => (v: number) =>
@@ -182,7 +183,9 @@ function Person({
       {/* Giriş: büyük isim ve rol */}
       <motion.div
         style={{ ...pos(introText), pointerEvents: introEvents }}
-        className={`absolute flex flex-col justify-start md:justify-center ${flip ? "md:items-end md:text-right" : ""}`}
+        // Aynalı kişide satırlar tam genişlikte kalır, yalnızca yazı sağa yaslanır: itme yüzdesi satır genişliğine
+        // göre hesaplandığından satırlar yazı kadar daralırsa (items-end) isim portreden yavaş kayıp altında kalır
+        className={`absolute flex flex-col justify-start md:justify-center ${flip ? "md:text-right" : ""}`}
       >
         <h2 className="text-[clamp(52px,min(8vw,13vh),136px)] font-medium leading-[1] tracking-[-0.05em]">
           <Masked s={s} y={introY(0)} x={introX(0)}>

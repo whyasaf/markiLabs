@@ -33,6 +33,7 @@ const TEAM: TeamMember[] = [
     links: [
       { label: "whyasaf.com", href: "https://whyasaf.com" },
       { label: "GitHub", href: "https://github.com/whyasaf" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/omer-asaf-ak/" },
     ],
     focus: { tr: ["Web uygulamaları", "Yapay zekâ", "Arayüz"], en: ["Web apps", "AI", "Interface design"] },
   },
@@ -46,6 +47,26 @@ const TEAM: TeamMember[] = [
     },
     links: [],
     focus: { tr: ["Marka kimliği", "Dijital pazarlama", "Google Ads"], en: ["Brand identity", "Digital marketing", "Google Ads"] },
+  },
+  {
+    first: "Cemre Rümeysa",
+    last: "Yenal",
+    role: { tr: "Yazılım Mühendisi", en: "Software Engineer" },
+    // Cemre'nin kendi metninden, üçüncü şahsa çevrildi
+    bio: {
+      tr: "Yazılım geliştirmeye tutkuyla yaklaşan, çözüm odaklı bir yazılım mühendisi. Başta C# olmak üzere yazılım geliştirme alanında çalışıyor; ihtiyaca uygun ve sürdürülebilir çözümler üretmeye önem veriyor. Yeni teknolojilere açık, sorumluluk sahibi ve ekip çalışmasına yatkın. Kendini sürekli geliştirerek projelere değer katmayı hedefliyor.",
+      en: "A solution-focused software engineer with a real passion for building software. Works mainly in C#, with a focus on solutions that fit the need and hold up over time. Open to new technology, takes ownership and works well in a team; always learning, to add more to every project.",
+    },
+    // Yüz ortada olsun diye kırpılmış kopya (asıl dosya: cemre.jpeg)
+    photo: "/team/cemre/cemre.jpg",
+    links: [
+      { label: "GitHub", href: "https://github.com/cemreyenal" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/cemre-rümeysa-yenal-3189b738b" },
+    ],
+    focus: {
+      tr: ["Web geliştirme", "Mobil oyun geliştirme", "Yapay zekâ"],
+      en: ["Web development", "Mobile game development", "Artificial intelligence"],
+    },
   },
 ];
 
